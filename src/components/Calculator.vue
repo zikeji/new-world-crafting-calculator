@@ -1,0 +1,156 @@
+<template lang="pug">
+  v-card.mx-auto.mt-5
+    v-card-text
+      .d-flex.flex-row.align-stretch
+        v-autocomplete.mr-2(v-model="selected" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.qty.focus()" return-object)
+        v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details)
+        div
+          v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add")
+            | Add
+            v-icon mdi-plus
+    v-divider(v-if="items.length > 0")
+    v-list-item(v-for="{item, quantity} in items" :key="item")
+      v-list-item-content
+        v-list-item-title
+          span.text-h5.font-weight-bold {{ quantity }}x
+          span.text-h6.font-weight-light &nbsp; {{ getName(item) }}
+        v-list-item-subtitle.wrap-text {{ generateRequires(item, quantity) }}
+      v-list-item-action
+        v-btn(icon @click="remove(item)")
+          v-icon(color="error") mdi-delete
+    v-card-actions
+      v-spacer
+      CopyToClipboard(v-model="url")
+        template(v-slot="{ click }")
+          v-btn(@click="click" :disabled="items.length === 0") Copy Link
+      v-btn(color="secondary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View bom
+    BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName" :generateRequires="generateRequires")
+    v-overlay(absolute :value="loadData.loading")
+      v-progress-circular(indeterminate size="64")
+    v-overlay(absolute :value="loadData.error")
+      v-container.text-center
+        v-icon(color="error" size="64") mdi-alert
+        div.text-heading-5 Failed to load data. Please try again.
+</template>
+
+<script>
+import CopyToClipboard from './CopyToClipboard.vue';
+import BillOfMaterials from './Calculator/BillOfMaterials.vue';
+
+export default {
+  name: 'Calculator',
+  components: {
+    CopyToClipboard,
+    BillOfMaterials
+  },
+  mounted() {
+    fetch('data.json').then((response) => response.json()).then((data) => {
+      this.availableItems = data;
+      this.loadFromUrl();
+      this.loadData.loading = false;
+    }).catch(() => {
+      this.loadData.loading = false;
+      this.loadData.error = true;
+    });
+  },
+  data: () => ({
+    loadData: {
+      loading: true,
+      error: ''
+    },
+    selected: null,
+    quantity: null,
+    availableItems: {},
+    items: [],
+    billOfMaterials: {
+      dialog: false
+    }
+  }),
+  computed: {
+    url() {
+      const params = new URLSearchParams(window.location.search);
+      const newURL = new URL(window.location.href);
+      if (this.items.length > 0) {
+        const p = [];
+        for (const item of this.items) {
+          p.push(`${item.item}|${item.quantity}`);
+        }
+        params.set('s', btoa(p.join(',')));
+      } else {
+        params.delete('s');
+      }
+      newURL.search = params.toString();
+      return newURL.href;
+    }
+  },
+  methods: {
+    loadFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('s')) {
+        try {
+          for (const p of atob(params.get('s')).split(',')) {
+            if (p.split('|').length !== 2) {
+              continue;
+            }
+            if (!this.availableItems[p.split('|')[0]]) {
+              continue;
+            }
+            this.items.push({
+              item: p.split('|')[0],
+              quantity: parseInt(p.split('|')[1])
+            });
+          }
+        } catch (e) {
+          // noop
+        }
+      }
+    },
+    updateUrl() {
+      if (window.history && window.history.replaceState && this.url !== window.location.href) {
+        window.history.replaceState(null, null, this.url);
+      }
+    },
+    add() {
+      const currentIndex = this.items.findIndex(c => c.item === this.selected.id);
+      if (currentIndex > -1) {
+        this.items[currentIndex].quantity += parseInt(this.quantity);
+      } else {
+        this.items.push({
+          quantity: parseInt(this.quantity),
+          item: this.selected.id
+        });
+      }
+      this.selected = null;
+      this.quantity = null;
+      this.updateUrl();
+    },
+    remove(item) {
+      const currentIndex = this.items.findIndex(c => c.item === item);
+      if (currentIndex > -1) {
+        this.items.splice(currentIndex, 1);
+        this.updateUrl();
+      }
+    },
+    getName(item) {
+      return this.availableItems[item].name;
+    },
+    generateRequires(item, quantity) {
+      let text = '';
+      item = this.availableItems[item];
+      if (!item.raw) {
+        return 'Raw material.';
+      }
+      for (let i = 0; i < item.raw.length; i += 1) {
+        if (i !== 0) {
+          text += ', ';
+        }
+        if (item.raw.length > 1 && i === item.raw.length - 1) {
+          text += '& ';
+        }
+        text += `${quantity * item.raw[i][1]} ${this.availableItems[item.raw[i][0]].name}`;
+      }
+      return text;
+    }
+  }
+}
+</script>
