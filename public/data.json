@@ -1,0 +1,513 @@
+{
+    "air_mote": {
+      "name": "Air Mote"
+    },
+    "aged_tannin": {
+      "name": "Aged Tannin"
+    },
+    "aged_wood": {
+      "name": "Aged Wood"
+    },
+    "asmodeum": {
+      "name": "Asmodeum",
+      "raw": [
+        [
+          "orichalcum_ingot",
+          5
+        ],
+        [
+          "tolvium",
+          1
+        ],
+        [
+          "cinnabar",
+          1
+        ],
+        [
+          "obsidian_flux",
+          1
+        ],
+        [
+          "charcoal",
+          2
+        ]
+      ]
+    },
+    "blisterweave": {
+      "name": "Blisterweave"
+    },
+    "cinnabar": {
+      "name": "Cinnabar"
+    },
+    "charcoal": {
+      "name": "Charcoal"
+    },
+    "cloth_weave": {
+      "name": "Cloth Weave"
+    },
+    "coarse_leather": {
+      "name": "Coarse Leather",
+      "raw": [
+        [
+          "rawhide",
+          4
+        ]
+      ]
+    },
+    "death_mote": {
+      "name": "Death Mote"
+    },
+    "earth_mote": {
+      "name": "Earth Mote"
+    },
+    "eternal_heart": {
+      "name": "Eternal Heart",
+      "raw": [
+        [
+          "water_mote",
+          50
+        ],
+        [
+          "earth_mote",
+          50
+        ],
+        [
+          "fire_mote",
+          50
+        ],
+        [
+          "air_mote",
+          50
+        ]
+      ]
+    },
+    "elemental_heart": {
+      "name": "Elemental Heart",
+      "raw": [
+        [
+          "death_mote",
+          50
+        ],
+        [
+          "life_mote",
+          50
+        ],
+        [
+          "soul_mote",
+          50
+        ]
+      ]
+    },
+    "energy_core": {
+      "name": "Energy Core",
+      "raw": [
+        [
+          "elemental_heart",
+          1
+        ],
+        [
+          "eternal_heart",
+          1
+        ]
+      ]
+    },
+    "fibers": {
+      "name": "Fibers"
+    },
+    "fire_mote": {
+      "name": "Fire Mote"
+    },
+    "flux": {
+      "name": "Flux"
+    },
+    "gold_ingot": {
+      "name": "Gold Ingot",
+      "raw": [
+        [
+          "gold_ore",
+          5
+        ],
+        [
+          "silver_ingot",
+          2
+        ],
+        [
+          "flux",
+          1
+        ]
+      ]
+    },
+    "gold_ore": {
+      "name": "Gold Ore"
+    },
+    "green_wood": {
+      "name": "Green Wood"
+    },
+    "infused_leather": {
+      "name": "Infused Leather",
+      "raw": [
+        [
+          "iron_hide",
+          8
+        ],
+        [
+          "layered_leather",
+          2
+        ]
+      ]
+    },
+    "infused_silk": {
+      "name": "Infused Silk",
+      "raw": [
+        [
+          "wirefiber",
+          8
+        ],
+        [
+          "silk",
+          2
+        ],
+        [
+          "cloth_weave",
+          1
+        ]
+      ]
+    },
+    "iron_hide": {
+      "name": "Iron Hide"
+    },
+    "iron_ingot": {
+      "name": "Iron Ingot",
+      "raw": [
+        [
+          "iron_ore",
+          4
+        ]
+      ]
+    },
+    "iron_ore": {
+      "name": "Iron Ore"
+    },
+    "layered_leather": {
+      "name": "Layered Leather",
+      "raw": [
+        [
+          "thick_hide",
+          6
+        ],
+        [
+          "rugged_leather",
+          2
+        ],
+        [
+          "tannin",
+          1
+        ]
+      ]
+    },
+    "life_mote": {
+      "name": "Life Mote"
+    },
+    "linen": {
+      "name": "Linen",
+      "raw": [
+        [
+          "fibers",
+          4
+        ]
+      ]
+    },
+    "lumber": {
+      "name": "Lumber",
+      "raw": [
+        [
+          "aged_wood",
+          4
+        ],
+        [
+          "timber",
+          2
+        ],
+        [
+          "sandpaper",
+          1
+        ]
+      ]
+    },
+    "obsidian_flux": {
+      "name": "Obsidian Flux"
+    },
+    "orichalcum_ingot": {
+      "name": "Orichalcum Ingot",
+      "raw": [
+        [
+          "orichalcum_ore",
+          8
+        ],
+        [
+          "starmetal_ingot",
+          2
+        ],
+        [
+          "flux",
+          1
+        ],
+        [
+          "charcoal",
+          2
+        ]
+      ]
+    },
+    "orichalcum_ore": {
+      "name": "Orichalcum Ore"
+    },
+    "phoenixweave": {
+      "name": "Phoenixweave",
+      "raw": [
+        [
+          "infused_silk",
+          5
+        ],
+        [
+          "scalecloth",
+          1
+        ],
+        [
+          "blisterweave",
+          1
+        ],
+        [
+          "wireweave",
+          1
+        ]
+      ]
+    },
+    "platinum_ingot": {
+      "name": "Platinum Ingot",
+      "raw": [
+        [
+          "platinum_ore",
+          6
+        ],
+        [
+          "gold_ingot",
+          2
+        ],
+        [
+          "flux",
+          1
+        ]
+      ]
+    },
+    "platinum_ore": {
+      "name": "Platinum Ore"
+    },
+    "rawhide": {
+      "name": "Rawhide"
+    },
+    "rugged_leather": {
+      "name": "Rugged Leather",
+      "raw": [
+        [
+          "coarse_leather",
+          4
+        ],
+        [
+          "tannin",
+          1
+        ]
+      ]
+    },
+    "runic_leather": {
+      "name": "Runic Leather",
+      "raw": [
+        [
+          "infused_leather",
+          5
+        ],
+        [
+          "smolderhide",
+          1
+        ],
+        [
+          "scarhide",
+          1
+        ],
+        [
+          "aged_tannin",
+          1
+        ]
+      ]
+    },
+    "sandpaper": {
+      "name": "Sandpaper"
+    },
+    "sateen": {
+      "name": "Sateen",
+      "raw": [
+        [
+          "linen",
+          4
+        ],
+        [
+          "cloth_weave",
+          1
+        ]
+      ]
+    },
+    "scalecloth": {
+      "name": "Scalecloth"
+    },
+    "scarhide": {
+      "name": "Scarhide"
+    },
+    "silk": {
+      "name": "Silk",
+      "raw": [
+        [
+          "silk_threads",
+          6
+        ],
+        [
+          "sateen",
+          2
+        ],
+        [
+          "cloth_weave",
+          1
+        ]
+      ]
+    },
+    "silk_threads": {
+      "name": "Silk Threads"
+    },
+    "silver_ingot": {
+      "name": "Silver Ingot",
+      "raw": [
+        [
+          "silver_ore",
+          4
+        ]
+      ]
+    },
+    "silver_ore": {
+      "name": "Silver Ore"
+    },
+    "soul_mote": {
+      "name": "Soul Mote"
+    },
+    "starmetal_ingot": {
+      "name": "Starmetal Ingot",
+      "raw": [
+        [
+          "starmetal_ore",
+          6
+        ],
+        [
+          "steel_ingot",
+          2
+        ],
+        [
+          "flux",
+          1
+        ],
+        [
+          "charcoal",
+          2
+        ]
+      ]
+    },
+    "smolderhide": {
+      "name": "Smolderhide"
+    },
+    "starmetal_ore": {
+      "name": "Starmetal Ore"
+    },
+    "steel_ingot": {
+      "name": "Steel Ingot",
+      "raw": [
+        [
+          "iron_ingot",
+          3
+        ],
+        [
+          "flux",
+          1
+        ],
+        [
+          "charcoal",
+          2
+        ]
+      ]
+    },
+    "tannin": {
+      "name": "Tannin"
+    },
+    "thick_hide": {
+      "name": "Thick Hide"
+    },
+    "timber": {
+      "name": "Timber",
+      "raw": [
+        [
+          "green_wood",
+          4
+        ]
+      ]
+    },
+    "tolvium": {
+      "name": "Tolvium"
+    },
+    "void_essence": {
+      "name": "Void Essence"
+    },
+    "voidbent_ingot": {
+      "name": "Voidbent Ingot",
+      "raw": [
+        [
+          "void_ore",
+          1
+        ],
+        [
+          "void_essence",
+          1
+        ],
+        [
+          "energy_core",
+          10
+        ]
+      ]
+    },
+    "void_ore": {
+      "name": "Void Ore"
+    },
+    "water_mote": {
+      "name": "Water Mote"
+    },
+    "wirefiber": {
+      "name": "Wirefiber"
+    },
+    "wireweave": {
+      "name": "Wireweave"
+    },
+    "wyrdwood": {
+      "name": "Wyrdwood"
+    },
+    "wyrdwood_planks": {
+      "name": "Wyrdwood Planks",
+      "raw": [
+        [
+          "wyrdwood",
+          6
+        ],
+        [
+          "lumber",
+          2
+        ],
+        [
+          "sandpaper",
+          1
+        ]
+      ]
+    }
+  }
