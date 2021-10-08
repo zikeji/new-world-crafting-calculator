@@ -30,7 +30,7 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
-          tags: zikeji/nwcraft:latest
+          tags: repo.treescale.com/zikeji/nwcraft:latest
           build-args: |
             VUE_APP_DISCORD_TAG=${{ secrets.VUE_APP_DISCORD_TAG }}
             VUE_APP_MATAMO_URL=${{ secrets.VUE_APP_MATAMO_URL }}
