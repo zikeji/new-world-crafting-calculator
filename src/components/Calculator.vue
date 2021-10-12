@@ -9,12 +9,22 @@
             | Add
             v-icon mdi-plus
     v-divider(v-if="items.length > 0")
-    v-list-item(v-for="{item, quantity} in items" :key="item")
+    v-list-item(v-for="{item, quantity}, index in items" :key="item")
       v-list-item-content
         v-list-item-title
-          span.text-h5.font-weight-bold {{ quantity }}x
-          span.text-h6.font-weight-light &nbsp; {{ getName(item) }}
-        v-list-item-subtitle.wrap-text {{ generateRequires(item, quantity) }}
+          v-menu(eager disable-keys :close-on-content-click="false")
+            template(v-slot:activator="{ on, attrs }")
+              span.text-h5.font-weight-bold(v-bind="attrs" v-on="on") {{ quantity }}x&nbsp;
+            v-card.pb-1
+              v-text-field(:value="quantity" autofocus filled dense type="number" hide-details @input="updateQuantity(item, $event)" style="width: 100px;")
+          a.text-h6.font-weight-light.text-decoration-none(:href="`https://nwdb.info/db/item/${item}`" :class="$vuetify.theme.dark ? 'white--text' : 'black--text'" target="_blank") {{ getName(item) }}
+        v-list-item-subtitle.wrap-text(v-if="availableItems[item].raw")
+          template(v-for="[rawItem, rawQuantity], index in availableItems[item].raw")
+            template(v-if="index !== 0") ,&nbsp;
+            template(v-if="availableItems[item].raw.length > 1 && index === (availableItems[item].raw.length - 1)") &amp;&nbsp;
+            | {{ rawQuantity * quantity }}&nbsp;
+            a.text-decoration-none(v-if="!availableItems[rawItem].options" :href="`https://nwdb.info/db/item/${rawItem}`" :class="$vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank") {{ availableItems[rawItem].name }}
+            template(v-else) {{ availableItems[rawItem].name }}
       v-list-item-action
         v-btn(icon @click="remove(item)")
           v-icon(color="error") mdi-delete
@@ -24,7 +34,7 @@
         template(v-slot="{ click }")
           v-btn(@click="click" :disabled="items.length === 0") Copy Link
       v-btn(color="secondary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View bom
-    BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName" :generateRequires="generateRequires")
+    BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName")
     v-overlay(absolute :value="loadData.loading")
       v-progress-circular(indeterminate size="64")
     v-overlay(absolute :value="loadData.error")
@@ -124,6 +134,13 @@ export default {
       this.quantity = null;
       this.updateUrl();
     },
+    updateQuantity(item, quantity) {
+      const currentIndex = this.items.findIndex(c => c.item === item);
+      if (currentIndex > -1) {
+        this.items[currentIndex].quantity = quantity > 0 ? quantity : 1;
+      }
+      this.updateUrl();
+    },
     remove(item) {
       const currentIndex = this.items.findIndex(c => c.item === item);
       if (currentIndex > -1) {
@@ -133,23 +150,6 @@ export default {
     },
     getName(item) {
       return this.availableItems[item].name;
-    },
-    generateRequires(item, quantity) {
-      let text = '';
-      item = this.availableItems[item];
-      if (!item.raw) {
-        return 'Raw material.';
-      }
-      for (let i = 0; i < item.raw.length; i += 1) {
-        if (i !== 0) {
-          text += ', ';
-        }
-        if (item.raw.length > 1 && i === item.raw.length - 1) {
-          text += '& ';
-        }
-        text += `${quantity * item.raw[i][1]} ${this.availableItems[item.raw[i][0]].name}`;
-      }
-      return text;
     }
   }
 }

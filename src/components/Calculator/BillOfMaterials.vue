@@ -23,8 +23,7 @@ export default {
     url: String,
     items: Array,
     availableItems: Object,
-    getName: Function,
-    generateRequires: Function
+    getName: Function
   },
   model: {
     prop: 'value',
@@ -50,7 +49,8 @@ export default {
     text() {
       let newBillOfMaterials = '-- Materials --';
       for (const {item, quantity} of this.items) {
-        newBillOfMaterials += `\n${quantity}x ${this.getName(item)} (${this.generateRequires(item, quantity)})`;
+        const requires = this.generateRequires(item, quantity);
+        newBillOfMaterials += `\n${quantity}x ${this.getName(item)}${requires ? ` (${requires})` : ''}`;
       }
       newBillOfMaterials += `\n\n-- Raw Materials --`;
       let rawItems = [];
@@ -91,6 +91,23 @@ export default {
         });
       }
       return rawItems;
+    },
+    generateRequires(item, quantity) {
+      let text = '';
+      item = this.availableItems[item];
+      if (!item.raw) {
+        return null;
+      }
+      for (let i = 0; i < item.raw.length; i += 1) {
+        if (i !== 0) {
+          text += ', ';
+        }
+        if (item.raw.length > 1 && i === item.raw.length - 1) {
+          text += '& ';
+        }
+        text += `${quantity * item.raw[i][1]} ${this.availableItems[item.raw[i][0]].name}`;
+      }
+      return text;
     }
   }
 }

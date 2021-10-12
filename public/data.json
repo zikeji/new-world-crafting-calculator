@@ -1,513 +1,580 @@
 {
-    "air_mote": {
-      "name": "Air Mote"
-    },
-    "aged_tannin": {
-      "name": "Aged Tannin"
-    },
-    "aged_wood": {
-      "name": "Aged Wood"
-    },
-    "asmodeum": {
-      "name": "Asmodeum",
-      "raw": [
-        [
-          "orichalcum_ingot",
-          5
-        ],
-        [
-          "tolvium",
-          1
-        ],
-        [
-          "cinnabar",
-          1
-        ],
-        [
-          "obsidian_flux",
-          1
-        ],
-        [
-          "charcoal",
-          2
-        ]
+  "alchemyairt1": {
+    "name": "Air Mote"
+  },
+  "alchemydeatht1": {
+    "name": "Death Mote"
+  },
+  "alchemyeartht1": {
+    "name": "Earth Mote"
+  },
+  "alchemyfiret1": {
+    "name": "Fire Mote"
+  },
+  "alchemylifet1": {
+    "name": "Life Mote"
+  },
+  "alchemyspiritt1": {
+    "name": "Soul Mote"
+  },
+  "alchemywatert1": {
+    "name": "Water Mote"
+  },
+  "blisterweavet1": {
+    "name": "Blisterweave"
+  },
+  "charcoalt1": {
+    "name": "Charcoal"
+  },
+  "cinnabart1": {
+    "name": "Cinnabar"
+  },
+  "clotht2": {
+    "name": "Linen",
+    "raw": [
+      [
+        "fibert1",
+        4
       ]
-    },
-    "blisterweave": {
-      "name": "Blisterweave"
-    },
-    "cinnabar": {
-      "name": "Cinnabar"
-    },
-    "charcoal": {
-      "name": "Charcoal"
-    },
-    "cloth_weave": {
-      "name": "Cloth Weave"
-    },
-    "coarse_leather": {
-      "name": "Coarse Leather",
-      "raw": [
-        [
-          "rawhide",
-          4
-        ]
+    ]
+  },
+  "clotht3": {
+    "name": "Sateen",
+    "raw": [
+      [
+        "clotht2",
+        4
+      ],
+      [
+        "clothweave",
+        1
       ]
-    },
-    "death_mote": {
-      "name": "Death Mote"
-    },
-    "earth_mote": {
-      "name": "Earth Mote"
-    },
-    "eternal_heart": {
-      "name": "Eternal Heart",
-      "raw": [
-        [
-          "water_mote",
-          50
-        ],
-        [
-          "earth_mote",
-          50
-        ],
-        [
-          "fire_mote",
-          50
-        ],
-        [
-          "air_mote",
-          50
-        ]
+    ]
+  },
+  "clotht4": {
+    "name": "Silk",
+    "raw": [
+      [
+        "fibert4",
+        6
+      ],
+      [
+        "clotht3",
+        2
+      ],
+      [
+        "clothweave",
+        1
       ]
-    },
-    "elemental_heart": {
-      "name": "Elemental Heart",
-      "raw": [
-        [
-          "death_mote",
-          50
-        ],
-        [
-          "life_mote",
-          50
-        ],
-        [
-          "soul_mote",
-          50
-        ]
+    ]
+  },
+  "clotht5": {
+    "name": "Infused Silk",
+    "raw": [
+      [
+        "fibert5",
+        8
+      ],
+      [
+        "clotht4",
+        2
+      ],
+      [
+        "clothweave",
+        1
       ]
-    },
-    "energy_core": {
-      "name": "Energy Core",
-      "raw": [
-        [
-          "elemental_heart",
-          1
-        ],
-        [
-          "eternal_heart",
-          1
-        ]
+    ]
+  },
+  "clothweave": {
+    "name": "Cloth Weave",
+    "options": [
+      "clothweavet3",
+      "clothweavet4",
+      "clothweavet5"
+    ]
+  },
+  "clothweavet3": {
+    "name": "Crossweave"
+  },
+  "clothweavet4": {
+    "name": "Silkweave"
+  },
+  "clothweavet5": {
+    "name": "Wireweave"
+  },
+  "fibert1": {
+    "name": "Fibers"
+  },
+  "fibert4": {
+    "name": "Silk Threads"
+  },
+  "fibert5": {
+    "name": "Wirefiber"
+  },
+  "flux": {
+    "name": "Flux",
+    "options": [
+      "fluxt3",
+      "fluxt4",
+      "fluxt5"
+    ]
+  },
+  "fluxt3": {
+    "name": "Sand Flux"
+  },
+  "fluxt4": {
+    "name": "Shelldust Flux"
+  },
+  "fluxt5": {
+    "name": "Obsidian Flux"
+  },
+  "ingotprecioust1": {
+    "name": "Silver Ingot",
+    "raw": [
+      [
+        "oreprecioust1",
+        4
       ]
-    },
-    "fibers": {
-      "name": "Fibers"
-    },
-    "fire_mote": {
-      "name": "Fire Mote"
-    },
-    "flux": {
-      "name": "Flux"
-    },
-    "gold_ingot": {
-      "name": "Gold Ingot",
-      "raw": [
-        [
-          "gold_ore",
-          5
-        ],
-        [
-          "silver_ingot",
-          2
-        ],
-        [
-          "flux",
-          1
-        ]
+    ]
+  },
+  "ingotprecioust2": {
+    "name": "Gold Ingot",
+    "raw": [
+      [
+        "oreprecioust2",
+        5
+      ],
+      [
+        "ingotprecioust1",
+        2
+      ],
+      [
+        "flux",
+        1
       ]
-    },
-    "gold_ore": {
-      "name": "Gold Ore"
-    },
-    "green_wood": {
-      "name": "Green Wood"
-    },
-    "infused_leather": {
-      "name": "Infused Leather",
-      "raw": [
-        [
-          "iron_hide",
-          8
-        ],
-        [
-          "layered_leather",
-          2
-        ]
+    ]
+  },
+  "ingotprecioust3": {
+    "name": "Platinum Ingot",
+    "raw": [
+      [
+        "oreprecioust3",
+        6
+      ],
+      [
+        "ingotprecioust2",
+        2
+      ],
+      [
+        "flux",
+        1
       ]
-    },
-    "infused_silk": {
-      "name": "Infused Silk",
-      "raw": [
-        [
-          "wirefiber",
-          8
-        ],
-        [
-          "silk",
-          2
-        ],
-        [
-          "cloth_weave",
-          1
-        ]
+    ]
+  },
+  "ingott2": {
+    "name": "Iron Ingot",
+    "raw": [
+      [
+        "oret1",
+        4
       ]
-    },
-    "iron_hide": {
-      "name": "Iron Hide"
-    },
-    "iron_ingot": {
-      "name": "Iron Ingot",
-      "raw": [
-        [
-          "iron_ore",
-          4
-        ]
+    ]
+  },
+  "ingott3": {
+    "name": "Steel Ingot",
+    "raw": [
+      [
+        "ingott2",
+        3
+      ],
+      [
+        "flux",
+        1
+      ],
+      [
+        "charcoalt1",
+        2
       ]
-    },
-    "iron_ore": {
-      "name": "Iron Ore"
-    },
-    "layered_leather": {
-      "name": "Layered Leather",
-      "raw": [
-        [
-          "thick_hide",
-          6
-        ],
-        [
-          "rugged_leather",
-          2
-        ],
-        [
-          "tannin",
-          1
-        ]
+    ]
+  },
+  "ingott4": {
+    "name": "Starmetal Ingot",
+    "raw": [
+      [
+        "oret4",
+        6
+      ],
+      [
+        "ingott3",
+        2
+      ],
+      [
+        "flux",
+        1
+      ],
+      [
+        "charcoalt1",
+        2
       ]
-    },
-    "life_mote": {
-      "name": "Life Mote"
-    },
-    "linen": {
-      "name": "Linen",
-      "raw": [
-        [
-          "fibers",
-          4
-        ]
+    ]
+  },
+  "ingott5": {
+    "name": "Orichalcum Ingot",
+    "raw": [
+      [
+        "oret5",
+        8
+      ],
+      [
+        "ingott4",
+        2
+      ],
+      [
+        "flux",
+        1
+      ],
+      [
+        "charcoalt1",
+        2
       ]
-    },
-    "lumber": {
-      "name": "Lumber",
-      "raw": [
-        [
-          "aged_wood",
-          4
-        ],
-        [
-          "timber",
-          2
-        ],
-        [
-          "sandpaper",
-          1
-        ]
+    ]
+  },
+  "ingott51": {
+    "name": "ingott51",
+    "raw": [
+      [
+        "ingott5",
+        5
+      ],
+      [
+        "tolviumt1",
+        1
+      ],
+      [
+        "cinnabart1",
+        1
+      ],
+      [
+        "obsidian_flux",
+        1
+      ],
+      [
+        "charcoalt1",
+        2
       ]
-    },
-    "obsidian_flux": {
-      "name": "Obsidian Flux"
-    },
-    "orichalcum_ingot": {
-      "name": "Orichalcum Ingot",
-      "raw": [
-        [
-          "orichalcum_ore",
-          8
-        ],
-        [
-          "starmetal_ingot",
-          2
-        ],
-        [
-          "flux",
-          1
-        ],
-        [
-          "charcoal",
-          2
-        ]
+    ]
+  },
+  "keypart_core": {
+    "name": "Energy Core",
+    "raw": [
+      [
+        "keypart_elementalheart",
+        1
+      ],
+      [
+        "keypart_eternalheart",
+        1
       ]
-    },
-    "orichalcum_ore": {
-      "name": "Orichalcum Ore"
-    },
-    "phoenixweave": {
-      "name": "Phoenixweave",
-      "raw": [
-        [
-          "infused_silk",
-          5
-        ],
-        [
-          "scalecloth",
-          1
-        ],
-        [
-          "blisterweave",
-          1
-        ],
-        [
-          "wireweave",
-          1
-        ]
+    ]
+  },
+  "keypart_elementalheart": {
+    "name": "Elemental Heart",
+    "raw": [
+      [
+        "alchemydeatht1",
+        50
+      ],
+      [
+        "alchemylifet1",
+        50
+      ],
+      [
+        "alchemyspiritt1",
+        50
       ]
-    },
-    "platinum_ingot": {
-      "name": "Platinum Ingot",
-      "raw": [
-        [
-          "platinum_ore",
-          6
-        ],
-        [
-          "gold_ingot",
-          2
-        ],
-        [
-          "flux",
-          1
-        ]
+    ]
+  },
+  "keypart_eternalheart": {
+    "name": "Eternal Heart",
+    "raw": [
+      [
+        "alchemywatert1",
+        50
+      ],
+      [
+        "alchemyeartht1",
+        50
+      ],
+      [
+        "alchemyfiret1",
+        50
+      ],
+      [
+        "alchemyairt1",
+        50
       ]
-    },
-    "platinum_ore": {
-      "name": "Platinum Ore"
-    },
-    "rawhide": {
-      "name": "Rawhide"
-    },
-    "rugged_leather": {
-      "name": "Rugged Leather",
-      "raw": [
-        [
-          "coarse_leather",
-          4
-        ],
-        [
-          "tannin",
-          1
-        ]
+    ]
+  },
+  "leathert2": {
+    "name": "Coarse Leather",
+    "raw": [
+      [
+        "rawhidet1",
+        4
       ]
-    },
-    "runic_leather": {
-      "name": "Runic Leather",
-      "raw": [
-        [
-          "infused_leather",
-          5
-        ],
-        [
-          "smolderhide",
-          1
-        ],
-        [
-          "scarhide",
-          1
-        ],
-        [
-          "aged_tannin",
-          1
-        ]
+    ]
+  },
+  "leathert3": {
+    "name": "Rugged Leather",
+    "raw": [
+      [
+        "leathert2",
+        4
+      ],
+      [
+        "tannin",
+        1
       ]
-    },
-    "sandpaper": {
-      "name": "Sandpaper"
-    },
-    "sateen": {
-      "name": "Sateen",
-      "raw": [
-        [
-          "linen",
-          4
-        ],
-        [
-          "cloth_weave",
-          1
-        ]
+    ]
+  },
+  "leathert4": {
+    "name": "Layered Leather",
+    "raw": [
+      [
+        "rawhidet4",
+        6
+      ],
+      [
+        "leathert3",
+        2
+      ],
+      [
+        "tannin",
+        1
       ]
-    },
-    "scalecloth": {
-      "name": "Scalecloth"
-    },
-    "scarhide": {
-      "name": "Scarhide"
-    },
-    "silk": {
-      "name": "Silk",
-      "raw": [
-        [
-          "silk_threads",
-          6
-        ],
-        [
-          "sateen",
-          2
-        ],
-        [
-          "cloth_weave",
-          1
-        ]
+    ]
+  },
+  "leathert5": {
+    "name": "Infused Leather",
+    "raw": [
+      [
+        "rawhidet5",
+        8
+      ],
+      [
+        "leathert4",
+        2
       ]
-    },
-    "silk_threads": {
-      "name": "Silk Threads"
-    },
-    "silver_ingot": {
-      "name": "Silver Ingot",
-      "raw": [
-        [
-          "silver_ore",
-          4
-        ]
+    ]
+  },
+  "leathert51": {
+    "name": "Runic Leather",
+    "raw": [
+      [
+        "leathert5",
+        5
+      ],
+      [
+        "smolderhidet1",
+        1
+      ],
+      [
+        "scarhidet1",
+        1
+      ],
+      [
+        "tannint5",
+        1
       ]
-    },
-    "silver_ore": {
-      "name": "Silver Ore"
-    },
-    "soul_mote": {
-      "name": "Soul Mote"
-    },
-    "starmetal_ingot": {
-      "name": "Starmetal Ingot",
-      "raw": [
-        [
-          "starmetal_ore",
-          6
-        ],
-        [
-          "steel_ingot",
-          2
-        ],
-        [
-          "flux",
-          1
-        ],
-        [
-          "charcoal",
-          2
-        ]
+    ]
+  },
+  "oreprecioust1": {
+    "name": "Silver Ore"
+  },
+  "oreprecioust2": {
+    "name": "Gold Ore"
+  },
+  "oreprecioust3": {
+    "name": "Platinum Ore"
+  },
+  "oret1": {
+    "name": "Iron Ore"
+  },
+  "oret4": {
+    "name": "Starmetal Ore"
+  },
+  "oret5": {
+    "name": "Orichalcum Ore"
+  },
+  "phoenixweave": {
+    "name": "clotht51",
+    "raw": [
+      [
+        "clotht5",
+        5
+      ],
+      [
+        "scaleclotht1",
+        1
+      ],
+      [
+        "blisterweavet1",
+        1
+      ],
+      [
+        "clothweavet5",
+        1
       ]
-    },
-    "smolderhide": {
-      "name": "Smolderhide"
-    },
-    "starmetal_ore": {
-      "name": "Starmetal Ore"
-    },
-    "steel_ingot": {
-      "name": "Steel Ingot",
-      "raw": [
-        [
-          "iron_ingot",
-          3
-        ],
-        [
-          "flux",
-          1
-        ],
-        [
-          "charcoal",
-          2
-        ]
+    ]
+  },
+  "rawhidet1": {
+    "name": "rawhidet1"
+  },
+  "rawhidet4": {
+    "name": "Thick Hide"
+  },
+  "rawhidet5": {
+    "name": "Iron Hide"
+  },
+  "sandpaper": {
+    "name": "Sandpaper",
+    "options": [
+      "sandpapert3",
+      "sandpapert4",
+      "sandpapert5"
+    ]
+  },
+  "sandpapert3": {
+    "name": "Coarse Sandpaper"
+  },
+  "sandpapert4": {
+    "name": "Fine Sandpaper"
+  },
+  "sandpapert5": {
+    "name": "Obsidian Sandpaper"
+  },
+  "scaleclotht1": {
+    "name": "Scalecloth"
+  },
+  "scarhidet1": {
+    "name": "Scarhide"
+  },
+  "smolderhidet1": {
+    "name": "Smolderhide"
+  },
+  "tannin": {
+    "name": "Tannin",
+    "options": [
+      "tannint3",
+      "tannint4",
+      "tannint5"
+    ]
+  },
+  "tannint3": {
+    "name": "Tannin"
+  },
+  "tannint4": {
+    "name": "Rested Tannin"
+  },
+  "tannint5": {
+    "name": "Aged Tannin"
+  },
+  "timbert2": {
+    "name": "Timber",
+    "raw": [
+      [
+        "woodt1",
+        4
       ]
-    },
-    "tannin": {
-      "name": "Tannin"
-    },
-    "thick_hide": {
-      "name": "Thick Hide"
-    },
-    "timber": {
-      "name": "Timber",
-      "raw": [
-        [
-          "green_wood",
-          4
-        ]
+    ]
+  },
+  "timbert3": {
+    "name": "Lumber",
+    "raw": [
+      [
+        "woodt2",
+        4
+      ],
+      [
+        "timbert2",
+        2
+      ],
+      [
+        "sandpaper",
+        1
       ]
-    },
-    "tolvium": {
-      "name": "Tolvium"
-    },
-    "void_essence": {
-      "name": "Void Essence"
-    },
-    "voidbent_ingot": {
-      "name": "Voidbent Ingot",
-      "raw": [
-        [
-          "void_ore",
-          1
-        ],
-        [
-          "void_essence",
-          1
-        ],
-        [
-          "energy_core",
-          10
-        ]
+    ]
+  },
+  "timbert4": {
+    "name": "Wyrdwood Planks",
+    "raw": [
+      [
+        "woodt4",
+        6
+      ],
+      [
+        "timbert3",
+        2
+      ],
+      [
+        "sandpaper",
+        1
       ]
-    },
-    "void_ore": {
-      "name": "Void Ore"
-    },
-    "water_mote": {
-      "name": "Water Mote"
-    },
-    "wirefiber": {
-      "name": "Wirefiber"
-    },
-    "wireweave": {
-      "name": "Wireweave"
-    },
-    "wyrdwood": {
-      "name": "Wyrdwood"
-    },
-    "wyrdwood_planks": {
-      "name": "Wyrdwood Planks",
-      "raw": [
-        [
-          "wyrdwood",
-          6
-        ],
-        [
-          "lumber",
-          2
-        ],
-        [
-          "sandpaper",
-          1
-        ]
+    ]
+  },
+  "timbert5": {
+    "name": "Ironwood Planks",
+    "raw": [
+      [
+        "woodt5",
+        6
+      ],
+      [
+        "timbert4",
+        2
+      ],
+      [
+        "sandpaper",
+        1
       ]
-    }
+    ]
+  },
+  "tolviumt1": {
+    "name": "Tolvium"
+  },
+  "voidbentingot": {
+    "name": "Voidbent Ingot",
+    "raw": [
+      [
+        "voidore",
+        1
+      ],
+      [
+        "voidessence",
+        1
+      ],
+      [
+        "keypart_core",
+        10
+      ]
+    ]
+  },
+  "voidessence": {
+    "name": "Void Essence"
+  },
+  "voidore": {
+    "name": "Void Ore"
+  },
+  "woodt1": {
+    "name": "Green Wood"
+  },
+  "woodt2": {
+    "name": "Aged Wood"
+  },
+  "woodt4": {
+    "name": "Wyrdwood"
+  },
+  "woodt5": {
+    "name": "Ironwood"
   }
+}
