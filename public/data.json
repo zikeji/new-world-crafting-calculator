@@ -428,7 +428,7 @@
     ]
   },
   "rawhidet1": {
-    "name": "rawhidet1"
+    "name": "Rawhide"
   },
   "rawhidet4": {
     "name": "Thick Hide"
@@ -527,7 +527,7 @@
     "raw": [
       [
         "woodt5",
-        6
+        8
       ],
       [
         "timbert4",
