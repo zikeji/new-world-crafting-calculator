@@ -32,6 +32,9 @@
   "cinnabart1": {
     "name": "Cinnabar"
   },
+  "clawt5": {
+    "name": "Infused Claw"
+  },
   "clotht2": {
     "name": "Linen",
     "raw": [
@@ -125,6 +128,9 @@
   },
   "clothweavet5": {
     "name": "Wireweave"
+  },
+  "fangt4": {
+    "name": "Infused Fang"
   },
   "fibert1": {
     "name": "Fibers"

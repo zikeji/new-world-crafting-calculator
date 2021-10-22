@@ -29,6 +29,8 @@
           v-icon(color="error") mdi-delete
     v-card-actions
       v-spacer
+      v-btn.mr-2(v-if="recipeUrl" @click="$refs.nwdbImport.show()") NWDB Import
+        v-icon(right) mdi-import
       CopyToClipboard(v-model="url")
         template(v-slot="{ click }")
           v-btn(@click="click" :disabled="items.length === 0") Copy Link
@@ -36,19 +38,22 @@
       v-btn(color="primary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View BOM
         v-icon(right) mdi-list-status
     BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName")
+    NWDBImport(ref="nwdbImport" :recipe-url="recipeUrl" @imported="importRecipe")
 </template>
 
 <script>
 import { pack, unpack } from 'jsonc-compress';
 import CopyToClipboard from './CopyToClipboard.vue';
 import BillOfMaterials from './Calculator/BillOfMaterials.vue';
-import data from '../assets/data.json'
+import NWDBImport from './Calculator/NWDBImport.vue';
+import availableItems from '../assets/data.json';
 
 export default {
   name: 'Calculator',
   components: {
     CopyToClipboard,
-    BillOfMaterials
+    BillOfMaterials,
+    NWDBImport
   },
   mounted() {
     this.loadFromUrl()
@@ -56,11 +61,12 @@ export default {
   data: () => ({
     selected: null,
     quantity: null,
-    availableItems: data,
+    availableItems,
     items: [],
     billOfMaterials: {
       dialog: false
-    }
+    },
+    recipeUrl: process.env.VUE_APP_NWDB_RECIPEURL
   }),
   computed: {
     url() {
@@ -132,6 +138,19 @@ export default {
     },
     getName(item) {
       return this.availableItems[item].name;
+    },
+    importRecipe(items) {
+      for (const {item, quantity} of items) {
+        const currentIndex = this.items.findIndex(c => c.item === item);
+        if (currentIndex > -1) {
+          this.items[currentIndex].quantity += quantity;
+        } else {
+          this.items.push({
+            item,
+            quantity
+          });
+        }
+      }
     }
   }
 }
