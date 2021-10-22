@@ -35,17 +35,12 @@
           v-btn(@click="click" :disabled="items.length === 0") Copy Link
       v-btn(color="secondary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View bom
     BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName")
-    v-overlay(absolute :value="loadData.loading")
-      v-progress-circular(indeterminate size="64")
-    v-overlay(absolute :value="loadData.error")
-      v-container.text-center
-        v-icon(color="error" size="64") mdi-alert
-        div.text-heading-5 Failed to load data. Please try again.
 </template>
 
 <script>
 import CopyToClipboard from './CopyToClipboard.vue';
 import BillOfMaterials from './Calculator/BillOfMaterials.vue';
+import data from '../assets/data.json'
 
 export default {
   name: 'Calculator',
@@ -53,24 +48,10 @@ export default {
     CopyToClipboard,
     BillOfMaterials
   },
-  mounted() {
-    fetch('data.json').then((response) => response.json()).then((data) => {
-      this.availableItems = data;
-      this.loadFromUrl();
-      this.loadData.loading = false;
-    }).catch(() => {
-      this.loadData.loading = false;
-      this.loadData.error = true;
-    });
-  },
   data: () => ({
-    loadData: {
-      loading: true,
-      error: ''
-    },
     selected: null,
     quantity: null,
-    availableItems: {},
+    availableItems: data,
     items: [],
     billOfMaterials: {
       dialog: false

@@ -85,6 +85,27 @@
       ]
     ]
   },
+  "clotht51": {
+    "name": "Phoenixweave",
+    "raw": [
+      [
+        "clotht5",
+        5
+      ],
+      [
+        "scaleclotht1",
+        1
+      ],
+      [
+        "blisterweavet1",
+        1
+      ],
+      [
+        "clothweavet5",
+        1
+      ]
+    ]
+  },
   "clothweave": {
     "name": "Cloth Weave",
     "options": [
@@ -240,7 +261,7 @@
     ]
   },
   "ingott51": {
-    "name": "ingott51",
+    "name": "Asmodeum",
     "raw": [
       [
         "ingott5",
@@ -405,27 +426,6 @@
   },
   "oret5": {
     "name": "Orichalcum Ore"
-  },
-  "phoenixweave": {
-    "name": "clotht51",
-    "raw": [
-      [
-        "clotht5",
-        5
-      ],
-      [
-        "scaleclotht1",
-        1
-      ],
-      [
-        "blisterweavet1",
-        1
-      ],
-      [
-        "clothweavet5",
-        1
-      ]
-    ]
   },
   "rawhidet1": {
     "name": "Rawhide"
