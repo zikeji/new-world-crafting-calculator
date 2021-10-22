@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { pack, unpack } from 'jsonc-compress';
 import CopyToClipboard from './CopyToClipboard.vue';
 import BillOfMaterials from './Calculator/BillOfMaterials.vue';
 import data from '../assets/data.json'
@@ -47,6 +48,9 @@ export default {
   components: {
     CopyToClipboard,
     BillOfMaterials
+  },
+  mounted() {
+    this.loadFromUrl()
   },
   data: () => ({
     selected: null,
@@ -64,9 +68,9 @@ export default {
       if (this.items.length > 0) {
         const p = [];
         for (const item of this.items) {
-          p.push(`${item.item}|${item.quantity}`);
+          p.push([item.item, item.quantity])
         }
-        params.set('s', btoa(p.join(',')));
+        params.set('s', pack(p));
       } else {
         params.delete('s');
       }
@@ -79,17 +83,13 @@ export default {
       const params = new URLSearchParams(window.location.search);
       if (params.get('s')) {
         try {
-          for (const p of atob(params.get('s')).split(',')) {
-            if (p.split('|').length !== 2) {
-              continue;
+          for (const [item, quantity] of unpack(params.get('s'))) {
+            if (item in this.availableItems) {
+              this.items.push({
+                item,
+                quantity
+              });
             }
-            if (!this.availableItems[p.split('|')[0]]) {
-              continue;
-            }
-            this.items.push({
-              item: p.split('|')[0],
-              quantity: parseInt(p.split('|')[1])
-            });
           }
         } catch (e) {
           // noop
