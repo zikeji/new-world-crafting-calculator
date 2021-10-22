@@ -20,6 +20,9 @@
   "alchemywatert1": {
     "name": "Water Mote"
   },
+  "barbvinet1": {
+    "name": "Barbvine"
+  },
   "blisterweavet1": {
     "name": "Blisterweave"
   },
@@ -276,7 +279,7 @@
         1
       ],
       [
-        "obsidian_flux",
+        "fluxt5",
         1
       ],
       [
@@ -530,6 +533,27 @@
         8
       ],
       [
+        "wildwoodt1",
+        2
+      ],
+      [
+        "barbvinet1",
+        1
+      ],
+      [
+        "sandpapert5",
+        1
+      ]
+    ]
+  },
+  "timbert51": {
+    "name": "Glittering Ebony",
+    "raw": [
+      [
+        "timbert5",
+        5
+      ],
+      [
         "timbert4",
         2
       ],
@@ -564,6 +588,9 @@
   },
   "voidore": {
     "name": "Void Ore"
+  },
+  "wildwoodt1": {
+    "name": "Wildwood"
   },
   "woodt1": {
     "name": "Green Wood"
