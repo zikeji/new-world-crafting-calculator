@@ -15,15 +15,14 @@
 
 <script>
 import CopyToClipboard from '../CopyToClipboard.vue';
+import availableItems from '../../assets/data.json';
 
 export default {
   name: 'BillOfMaterials',
   props: {
     value: Boolean,
     url: String,
-    items: Array,
-    availableItems: Object,
-    getName: Function
+    items: Array
   },
   model: {
     prop: 'value',
@@ -34,7 +33,8 @@ export default {
   },
   data() {
     return {
-      dialog: !!this.value
+      dialog: !!this.value,
+      availableItems
     }
   },
   watch: {
@@ -50,7 +50,7 @@ export default {
       let newBillOfMaterials = '-- Materials --';
       for (const {item, quantity} of this.items) {
         const requires = this.generateRequires(item, quantity);
-        newBillOfMaterials += `\n${quantity}x ${this.getName(item)}${requires ? ` (${requires})` : ''}`;
+        newBillOfMaterials += `\n${quantity}x ${this.availableItems[item].name}${requires ? ` (${requires})` : ''}`;
       }
       newBillOfMaterials += `\n\n-- Raw Materials --`;
       let rawItems = [];
@@ -68,7 +68,7 @@ export default {
       }
       
       for (const {item, quantity} of mergedRawItems) {
-        newBillOfMaterials += `\n${quantity}x ${this.getName(item)}`;
+        newBillOfMaterials += `\n${quantity}x ${this.availableItems[item].name}`;
       }
       
       newBillOfMaterials += `\n\n${this.url}`;

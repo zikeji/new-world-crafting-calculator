@@ -18,7 +18,7 @@
                   span.text-h5.font-weight-bold(v-bind="attrs" v-on="on") {{ quantity }}x&nbsp;
                 v-card.pb-1
                   v-text-field(:value="quantity" autofocus filled dense type="number" hide-details @input="updateQuantity(item, $event)" style="width: 100px;")
-              a.text-h6.font-weight-light.text-decoration-none(:href="`https://nwdb.info/db/item/${item}`" :class="$vuetify.theme.dark ? 'white--text' : 'black--text'" target="_blank") {{ getName(item) }}
+              a.text-h6.font-weight-light.text-decoration-none(:href="`https://nwdb.info/db/item/${item}`" :class="$vuetify.theme.dark ? 'white--text' : 'black--text'" target="_blank") {{ availableItems[item].name }}
             v-list-item-subtitle.wrap-text(v-if="availableItems[item].raw")
               template(v-for="[rawItem, rawQuantity], index in availableItems[item].raw")
                 template(v-if="index !== 0") ,&nbsp;
@@ -40,7 +40,7 @@
             v-icon(right) mdi-content-copy
       v-btn(color="primary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View BOM
         v-icon(right) mdi-list-status
-    BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName")
+    BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items")
     NWDBImport(ref="nwdbImport" :recipe-url="recipeUrl" @imported="importRecipe")
 </template>
 
@@ -138,9 +138,6 @@ export default {
         this.items.splice(currentIndex, 1);
         this.updateUrl();
       }
-    },
-    getName(item) {
-      return this.availableItems[item].name;
     },
     importRecipe(items) {
       for (const {item, quantity} of items) {
