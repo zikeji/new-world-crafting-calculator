@@ -8,7 +8,7 @@
           v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
             v-icon(right) mdi-plus
     v-divider(v-if="items.length > 0")
-    template(v-for="{item, quantity}, index in items")
+    template(v-for="{item, quantity, options}, index in items")
       v-hover(v-slot:default="{ hover }")
         v-list-item(:key="item" style="min-height: 60px;")
           v-list-item-content
@@ -25,7 +25,15 @@
                 template(v-if="availableItems[item].raw.length > 1 && index === (availableItems[item].raw.length - 1)") &amp;&nbsp;
                 | {{ rawQuantity * quantity }}&nbsp;
                 a.font-weight-bold.text-decoration-none(v-if="!availableItems[rawItem].options" :href="`https://nwdb.info/db/item/${rawItem}`" :class="availableItems[rawItem].rarity ? `rarity-${availableItems[rawItem].rarity}`: $vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank") {{ availableItems[rawItem].name }}
-                template(v-else) {{ availableItems[rawItem].name }}
+                template(v-else)
+                  a.font-weight-bold.text-decoration-none(:href="`https://nwdb.info/db/item/${getOption(rawItem, options)}`" :class="getOption(rawItem, options, true).rarity ? `rarity-${getOption(rawItem, options, true).rarity}`: $vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank")
+                    | {{ getOption(rawItem, options, true).name }}
+                  v-menu(offset-y open-on-hover :open-on-click="false")
+                    template(v-slot:activator="{ on, attrs }")
+                      v-icon.ml-1(small v-on="on" v-bind="attrs") mdi-square-edit-outline
+                    v-list(dense)
+                      v-list-item(v-for="optionName in availableItems[rawItem].options" :key="optionName" @click="updateOption(item, rawItem, optionName)")
+                        v-list-item-title(:class="availableItems[optionName].rarity ? `rarity-${availableItems[optionName].rarity}`: null") {{ availableItems[optionName].name }}
           v-list-item-action
             v-fade-transition
               v-btn.ma-0(v-show="hover" icon @click="remove(item)")
@@ -38,9 +46,9 @@
         template(v-slot="{ click }")
           v-btn(@click="click" :disabled="items.length === 0") Copy Link
             v-icon(right) mdi-content-copy
-      v-btn(color="primary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View BOM
+      v-btn(color="primary" @click="$refs.billOfMaterials.show()" :disabled="items.length === 0") View BOM
         v-icon(right) mdi-list-status
-    BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items")
+    BillOfMaterials(ref="billOfMaterials" :url="url" :items="items")
     NWDBImport(ref="nwdbImport" :recipe-url="recipeUrl" @imported="importRecipe")
 </template>
 
@@ -66,9 +74,6 @@ export default {
     quantity: null,
     availableItems,
     items: [],
-    billOfMaterials: {
-      dialog: false
-    },
     recipeUrl: process.env.VUE_APP_NWDB_RECIPEURL
   }),
   computed: {
@@ -78,7 +83,11 @@ export default {
       if (this.items.length > 0) {
         const p = [];
         for (const item of this.items) {
-          p.push([item.item, item.quantity])
+          const d = [item.item, item.quantity];
+          if (item.options && Object.keys(item.options).length > 0) {
+            d.push(item.options);
+          }
+          p.push(d)
         }
         params.set('s', pack(p));
       } else {
@@ -93,11 +102,12 @@ export default {
       const params = new URLSearchParams(window.location.search);
       if (params.get('s')) {
         try {
-          for (const [item, quantity] of unpack(params.get('s'))) {
+          for (const [item, quantity, options] of unpack(params.get('s'))) {
             if (item in this.availableItems) {
               this.items.push({
                 item,
-                quantity
+                quantity,
+                options: options || {}
               });
             }
           }
@@ -118,7 +128,8 @@ export default {
       } else {
         this.items.push({
           quantity: parseInt(this.quantity),
-          item: this.selected.id
+          item: this.selected.id,
+          options: {}
         });
       }
       this.selected = null;
@@ -128,9 +139,21 @@ export default {
     updateQuantity(item, quantity) {
       const currentIndex = this.items.findIndex(c => c.item === item);
       if (currentIndex > -1) {
-        this.items[currentIndex].quantity = quantity > 0 ? quantity : 1;
+        const newItem = JSON.parse(JSON.stringify(this.items[currentIndex]));
+        newItem.quantity = quantity > 0 ? quantity : 1;
+        this.$set(this.items, currentIndex, newItem);
       }
       this.updateUrl();
+    },
+    updateOption(parentItem, item, option) {
+      const currentIndex = this.items.findIndex(c => c.item === parentItem);
+      if (currentIndex > -1) {
+        const newItem = JSON.parse(JSON.stringify(this.items[currentIndex]));
+        if (!newItem.options) newItem.options = {};
+        newItem.options[item] = option;
+        this.$set(this.items, currentIndex, newItem);
+        this.updateUrl();
+      }
     },
     remove(item) {
       const currentIndex = this.items.findIndex(c => c.item === item);
@@ -138,6 +161,10 @@ export default {
         this.items.splice(currentIndex, 1);
         this.updateUrl();
       }
+    },
+    getOption(item, options, obj) {
+      const id = options && item in options ? options[item] : availableItems[item].options[0];
+      return obj ? this.availableItems[id] : id;
     },
     importRecipe(items) {
       for (const {item, quantity} of items) {

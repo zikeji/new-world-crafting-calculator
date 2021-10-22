@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-dialog(v-model="value" max-width="600px")
+  v-dialog(v-model="dialog" max-width="600px")
     v-card
       v-card-title Bill of Materials
       v-divider
@@ -33,16 +33,8 @@ export default {
   },
   data() {
     return {
-      dialog: !!this.value,
+      dialog: false,
       availableItems
-    }
-  },
-  watch: {
-    value(val) {
-      this.dialog = !!val;
-    },
-    dialog(val) {
-      !!val !== this.value && this.$emit('input', val);
     }
   },
   computed: {
@@ -54,8 +46,8 @@ export default {
       }
       newBillOfMaterials += `\n\n-- Raw Materials --`;
       let rawItems = [];
-      for (const {item, quantity} of this.items) {
-        rawItems = [...rawItems, ...this.recurseRawItems(item, quantity)];
+      for (const {item, quantity, options} of this.items) {
+        rawItems = [...rawItems, ...this.recurseRawItems(item, quantity, options)];
       }
       const mergedRawItems = [];
       for (const {item, quantity} of rawItems) {
@@ -77,18 +69,28 @@ export default {
     }
   },
   methods: {
-    recurseRawItems(itemName, quantity) {
+    show() {
+      this.dialog = true;
+    },
+    recurseRawItems(itemName, quantity, options) {
       let rawItems = [];
       const item = this.availableItems[itemName];
       if (item.raw) {
         for (const [rawItem, rawQuantity] of item.raw) {
-          rawItems = [...rawItems, ...this.recurseRawItems(rawItem, quantity * rawQuantity)];
+          rawItems = [...rawItems, ...this.recurseRawItems(rawItem, quantity * rawQuantity, options)];
         }
       } else {
-        rawItems.push({
-          item: itemName,
-          quantity: quantity
-        });
+        if (!item.options) {
+          rawItems.push({
+            item: itemName,
+            quantity: quantity
+          });
+        } else {
+          rawItems.push({
+            item: options && options[itemName] ? options[itemName] : item.options[0],
+            quantity: quantity
+          });
+        }
       }
       return rawItems;
     },

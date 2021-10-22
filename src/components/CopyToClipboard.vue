@@ -21,7 +21,6 @@ export default {
   }),
   methods: {
     copyToClipboard() {
-      console.log('here');
       if (this.tooltip || this.error) return;
       if (!navigator || !navigator.clipboard || !navigator.clipboard.writeText) {
       this.error = true;
