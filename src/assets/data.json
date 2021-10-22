@@ -185,6 +185,10 @@
     "name": "Obsidian Flux",
     "rarity": 2
   },
+  "furt5": {
+    "name": "Infused Fur",
+    "rarity": 0
+  },
   "ingotprecioust1": {
     "name": "Silver Ingot",
     "raw": [
