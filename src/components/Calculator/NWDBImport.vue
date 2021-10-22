@@ -32,7 +32,7 @@ export default {
       loading: false,
       valid: false,
       error: '',
-      url: 'https://nwdb.info/db/recipe/mediumfeet_voidbentt5',
+      url: '',
       urlRegex: /https?:\/\/nwdb\.info\/db\/recipe\/(.*)/,
       unknownItemsSnackbar: false,
       unknownItems: []
