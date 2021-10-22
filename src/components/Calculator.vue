@@ -33,7 +33,7 @@
         template(v-slot="{ click }")
           v-btn(@click="click" :disabled="items.length === 0") Copy Link
             v-icon(right) mdi-content-copy
-      v-btn(color="primary" v-on="on" v-bind="attrs" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View BOM
+      v-btn(color="primary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View BOM
         v-icon(right) mdi-list-status
     BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName")
 </template>
