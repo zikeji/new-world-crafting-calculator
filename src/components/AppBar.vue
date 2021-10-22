@@ -9,9 +9,20 @@
       img(alt="Logo" src="/android-chrome-192x192.png")
     v-toolbar-title New World Crafting Calculator
     v-spacer
-    v-btn.mr-2(outlined href="https://newworldfans.com/")
-      v-icon mdi-link
-      | newworldfans.com
+    v-menu(bottom left offset-y)
+      template(v-slot:activator="{ on, attrs }")
+        v-btn.mr-2(outlined v-on="on" v-bind="attrs")
+          v-icon mdi-link
+          | Resources
+      v-list
+        v-list-item(href="https://newworldfans.com/")
+          v-list-item-avatar
+            v-img(src="/thirdparty/newworldfans-72x72.png")
+          v-list-item-title New World Fans
+        v-list-item(href="https://nwdb.info/")
+          v-list-item-avatar(color="grey darken-4")
+            v-img(src="/thirdparty/nwdb-42x42.png")
+          v-list-item-title New World Database
     v-tooltip(left)
       span(v-if="$vuetify.theme.dark") Set Light Mode
       span(v-else) Set Dark Mode
