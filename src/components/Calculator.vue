@@ -2,8 +2,8 @@
   v-card.mx-auto.mt-5
     v-card-text
       .d-flex.flex-row.align-stretch
-        v-autocomplete.mr-2(v-model="selected" :search-input.sync="search" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.qty.focus()" return-object)
-        v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details)
+        v-autocomplete.mr-2(v-model="selected" ref="resource" :search-input.sync="search" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.resource.blur(); $refs.qty.focus()" return-object)
+        v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details @keydown.enter="add")
         div
           v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
             v-icon(right) mdi-plus
@@ -131,6 +131,7 @@ export default {
       }
     },
     add() {
+      if (!this.selected || !this.quantity) return;
       const currentIndex = this.items.findIndex(c => c.item === this.selected.id);
       if (currentIndex > -1) {
         this.items[currentIndex].quantity += parseInt(this.quantity);
@@ -143,6 +144,8 @@ export default {
       }
       this.selected = null;
       this.quantity = null;
+      this.$refs.qty.blur();
+      this.$refs.resource.focus();
       this.updateUrl();
     },
     updateQuantity(item, quantity) {
