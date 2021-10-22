@@ -11,9 +11,8 @@
     v-spacer
     v-menu(bottom left offset-y)
       template(v-slot:activator="{ on, attrs }")
-        v-btn.mr-2(outlined v-on="on" v-bind="attrs")
-          v-icon mdi-link
-          | Resources
+        v-btn.mr-2(outlined v-on="on" v-bind="attrs") Resources
+          v-icon(right) mdi-link
       v-list
         v-list-item(href="https://newworldfans.com/")
           v-list-item-avatar

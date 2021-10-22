@@ -5,9 +5,8 @@
         v-autocomplete.mr-2(v-model="selected" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.qty.focus()" return-object)
         v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details)
         div
-          v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add")
-            | Add
-            v-icon mdi-plus
+          v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
+            v-icon(right) mdi-plus
     v-divider(v-if="items.length > 0")
     v-list-item(v-for="{item, quantity}, index in items" :key="item")
       v-list-item-content
@@ -33,7 +32,9 @@
       CopyToClipboard(v-model="url")
         template(v-slot="{ click }")
           v-btn(@click="click" :disabled="items.length === 0") Copy Link
-      v-btn(color="secondary" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View bom
+            v-icon(right) mdi-content-copy
+      v-btn(color="primary" v-on="on" v-bind="attrs" @click="billOfMaterials.dialog = true" :disabled="items.length === 0") View BOM
+        v-icon(right) mdi-list-status
     BillOfMaterials(v-model="billOfMaterials.dialog" :url="url" :items="items" :availableItems="availableItems" :getName="getName")
 </template>
 
