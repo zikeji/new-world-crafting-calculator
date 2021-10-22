@@ -2,7 +2,7 @@
   v-card.mx-auto.mt-5
     v-card-text
       .d-flex.flex-row.align-stretch
-        v-autocomplete.mr-2(v-model="selected" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.qty.focus()" return-object)
+        v-autocomplete.mr-2(v-model="selected" :search-input.sync="search" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.qty.focus()" return-object)
         v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details)
         div
           v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
@@ -70,6 +70,7 @@ export default {
     this.loadFromUrl()
   },
   data: () => ({
+    search: '',
     selected: null,
     quantity: null,
     availableItems,
@@ -95,6 +96,14 @@ export default {
       }
       newURL.search = params.toString();
       return newURL.href;
+    }
+  },
+  watch: {
+    search(val) {
+      if (val && val.endsWith('x') && /^[\d\s]+x$/.test(val)) {
+        this.quantity = this.search.slice(0, this.search.length - 1).trim();
+        this.search = '';
+      }
     }
   },
   methods: {
