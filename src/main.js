@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import matomo from './plugins/matomo'
+import './styles/index.scss'
 
 matomo();
 

@@ -1,39 +1,51 @@
 {
   "alchemyairt1": {
-    "name": "Air Mote"
+    "name": "Air Mote",
+    "rarity": 0
   },
   "alchemydeatht1": {
-    "name": "Death Mote"
+    "name": "Death Mote",
+    "rarity": 0
   },
   "alchemyeartht1": {
-    "name": "Earth Mote"
+    "name": "Earth Mote",
+    "rarity": 0
   },
   "alchemyfiret1": {
-    "name": "Fire Mote"
+    "name": "Fire Mote",
+    "rarity": 0
   },
   "alchemylifet1": {
-    "name": "Life Mote"
+    "name": "Life Mote",
+    "rarity": 0
   },
   "alchemyspiritt1": {
-    "name": "Soul Mote"
+    "name": "Soul Mote",
+    "rarity": 0
   },
   "alchemywatert1": {
-    "name": "Water Mote"
+    "name": "Water Mote",
+    "rarity": 0
   },
   "barbvinet1": {
-    "name": "Barbvine"
+    "name": "Barbvine",
+    "rarity": 4
   },
   "blisterweavet1": {
-    "name": "Blisterweave"
+    "name": "Blisterweave",
+    "rarity": 4
   },
   "charcoalt1": {
-    "name": "Charcoal"
+    "name": "Charcoal",
+    "rarity": 0
   },
   "cinnabart1": {
-    "name": "Cinnabar"
+    "name": "Cinnabar",
+    "rarity": 4
   },
   "clawt5": {
-    "name": "Infused Claw"
+    "name": "Infused Claw",
+    "rarity": 3
   },
   "clotht2": {
     "name": "Linen",
@@ -42,7 +54,8 @@
         "fibert1",
         4
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "clotht3": {
     "name": "Sateen",
@@ -55,7 +68,8 @@
         "clothweave",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "clotht4": {
     "name": "Silk",
@@ -72,7 +86,8 @@
         "clothweave",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "clotht5": {
     "name": "Infused Silk",
@@ -89,7 +104,8 @@
         "clothweave",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "clotht51": {
     "name": "Phoenixweave",
@@ -110,7 +126,8 @@
         "clothweavet5",
         1
       ]
-    ]
+    ],
+    "rarity": 3
   },
   "clothweave": {
     "name": "Cloth Weave",
@@ -121,25 +138,32 @@
     ]
   },
   "clothweavet3": {
-    "name": "Crossweave"
+    "name": "Crossweave",
+    "rarity": 0
   },
   "clothweavet4": {
-    "name": "Silkweave"
+    "name": "Silkweave",
+    "rarity": 1
   },
   "clothweavet5": {
-    "name": "Wireweave"
+    "name": "Wireweave",
+    "rarity": 2
   },
   "fangt4": {
-    "name": "Infused Fang"
+    "name": "Infused Fang",
+    "rarity": 3
   },
   "fibert1": {
-    "name": "Fibers"
+    "name": "Fibers",
+    "rarity": 0
   },
   "fibert4": {
-    "name": "Silk Threads"
+    "name": "Silk Threads",
+    "rarity": 0
   },
   "fibert5": {
-    "name": "Wirefiber"
+    "name": "Wirefiber",
+    "rarity": 0
   },
   "flux": {
     "name": "Flux",
@@ -150,13 +174,16 @@
     ]
   },
   "fluxt3": {
-    "name": "Sand Flux"
+    "name": "Sand Flux",
+    "rarity": 0
   },
   "fluxt4": {
-    "name": "Shelldust Flux"
+    "name": "Shelldust Flux",
+    "rarity": 1
   },
   "fluxt5": {
-    "name": "Obsidian Flux"
+    "name": "Obsidian Flux",
+    "rarity": 2
   },
   "ingotprecioust1": {
     "name": "Silver Ingot",
@@ -165,7 +192,8 @@
         "oreprecioust1",
         4
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "ingotprecioust2": {
     "name": "Gold Ingot",
@@ -182,7 +210,8 @@
         "flux",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "ingotprecioust3": {
     "name": "Platinum Ingot",
@@ -199,7 +228,8 @@
         "flux",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "ingott2": {
     "name": "Iron Ingot",
@@ -208,7 +238,8 @@
         "oret1",
         4
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "ingott3": {
     "name": "Steel Ingot",
@@ -225,7 +256,8 @@
         "charcoalt1",
         2
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "ingott4": {
     "name": "Starmetal Ingot",
@@ -246,7 +278,8 @@
         "charcoalt1",
         2
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "ingott5": {
     "name": "Orichalcum Ingot",
@@ -267,7 +300,8 @@
         "charcoalt1",
         2
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "ingott51": {
     "name": "Asmodeum",
@@ -292,7 +326,8 @@
         "charcoalt1",
         2
       ]
-    ]
+    ],
+    "rarity": 3
   },
   "keypart_core": {
     "name": "Energy Core",
@@ -305,7 +340,8 @@
         "keypart_eternalheart",
         1
       ]
-    ]
+    ],
+    "rarity": 2
   },
   "keypart_elementalheart": {
     "name": "Elemental Heart",
@@ -322,7 +358,8 @@
         "alchemyspiritt1",
         50
       ]
-    ]
+    ],
+    "rarity": 2
   },
   "keypart_eternalheart": {
     "name": "Eternal Heart",
@@ -343,7 +380,8 @@
         "alchemyairt1",
         50
       ]
-    ]
+    ],
+    "rarity": 2
   },
   "leathert2": {
     "name": "Coarse Leather",
@@ -352,7 +390,8 @@
         "rawhidet1",
         4
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "leathert3": {
     "name": "Rugged Leather",
@@ -365,7 +404,8 @@
         "tannin",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "leathert4": {
     "name": "Layered Leather",
@@ -382,7 +422,8 @@
         "tannin",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "leathert5": {
     "name": "Infused Leather",
@@ -395,7 +436,8 @@
         "leathert4",
         2
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "leathert51": {
     "name": "Runic Leather",
@@ -416,34 +458,44 @@
         "tannint5",
         1
       ]
-    ]
+    ],
+    "rarity": 3
   },
   "oreprecioust1": {
-    "name": "Silver Ore"
+    "name": "Silver Ore",
+    "rarity": 0
   },
   "oreprecioust2": {
-    "name": "Gold Ore"
+    "name": "Gold Ore",
+    "rarity": 0
   },
   "oreprecioust3": {
-    "name": "Platinum Ore"
+    "name": "Platinum Ore",
+    "rarity": 0
   },
   "oret1": {
-    "name": "Iron Ore"
+    "name": "Iron Ore",
+    "rarity": 0
   },
   "oret4": {
-    "name": "Starmetal Ore"
+    "name": "Starmetal Ore",
+    "rarity": 0
   },
   "oret5": {
-    "name": "Orichalcum Ore"
+    "name": "Orichalcum Ore",
+    "rarity": 0
   },
   "rawhidet1": {
-    "name": "Rawhide"
+    "name": "Rawhide",
+    "rarity": 0
   },
   "rawhidet4": {
-    "name": "Thick Hide"
+    "name": "Thick Hide",
+    "rarity": 0
   },
   "rawhidet5": {
-    "name": "Iron Hide"
+    "name": "Iron Hide",
+    "rarity": 0
   },
   "sandpaper": {
     "name": "Sandpaper",
@@ -454,22 +506,28 @@
     ]
   },
   "sandpapert3": {
-    "name": "Coarse Sandpaper"
+    "name": "Coarse Sandpaper",
+    "rarity": 0
   },
   "sandpapert4": {
-    "name": "Fine Sandpaper"
+    "name": "Fine Sandpaper",
+    "rarity": 1
   },
   "sandpapert5": {
-    "name": "Obsidian Sandpaper"
+    "name": "Obsidian Sandpaper",
+    "rarity": 2
   },
   "scaleclotht1": {
-    "name": "Scalecloth"
+    "name": "Scalecloth",
+    "rarity": 4
   },
   "scarhidet1": {
-    "name": "Scarhide"
+    "name": "Scarhide",
+    "rarity": 4
   },
   "smolderhidet1": {
-    "name": "Smolderhide"
+    "name": "Smolderhide",
+    "rarity": 4
   },
   "tannin": {
     "name": "Tannin",
@@ -480,13 +538,16 @@
     ]
   },
   "tannint3": {
-    "name": "Tannin"
+    "name": "Tannin",
+    "rarity": 0
   },
   "tannint4": {
-    "name": "Rested Tannin"
+    "name": "Rested Tannin",
+    "rarity": 1
   },
   "tannint5": {
-    "name": "Aged Tannin"
+    "name": "Aged Tannin",
+    "rarity": 2
   },
   "timbert2": {
     "name": "Timber",
@@ -495,7 +556,8 @@
         "woodt1",
         4
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "timbert3": {
     "name": "Lumber",
@@ -512,7 +574,8 @@
         "sandpaper",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "timbert4": {
     "name": "Wyrdwood Planks",
@@ -529,7 +592,8 @@
         "sandpaper",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "timbert5": {
     "name": "Ironwood Planks",
@@ -550,7 +614,8 @@
         "sandpapert5",
         1
       ]
-    ]
+    ],
+    "rarity": 0
   },
   "timbert51": {
     "name": "Glittering Ebony",
@@ -567,10 +632,12 @@
         "sandpaper",
         1
       ]
-    ]
+    ],
+    "rarity": 3
   },
   "tolviumt1": {
-    "name": "Tolvium"
+    "name": "Tolvium",
+    "rarity": 4
   },
   "voidbentingot": {
     "name": "Voidbent Ingot",
@@ -587,27 +654,35 @@
         "keypart_core",
         10
       ]
-    ]
+    ],
+    "rarity": 4
   },
   "voidessence": {
-    "name": "Void Essence"
+    "name": "Void Essence",
+    "rarity": 4
   },
   "voidore": {
-    "name": "Void Ore"
+    "name": "Void Ore",
+    "rarity": 4
   },
   "wildwoodt1": {
-    "name": "Wildwood"
+    "name": "Wildwood",
+    "rarity": 4
   },
   "woodt1": {
-    "name": "Green Wood"
+    "name": "Green Wood",
+    "rarity": 0
   },
   "woodt2": {
-    "name": "Aged Wood"
+    "name": "Aged Wood",
+    "rarity": 0
   },
   "woodt4": {
-    "name": "Wyrdwood"
+    "name": "Wyrdwood",
+    "rarity": 0
   },
   "woodt5": {
-    "name": "Ironwood"
+    "name": "Ironwood",
+    "rarity": 0
   }
 }

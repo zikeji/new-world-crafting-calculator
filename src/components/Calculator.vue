@@ -18,13 +18,13 @@
                   span.text-h5.font-weight-bold(v-bind="attrs" v-on="on") {{ quantity }}x&nbsp;
                 v-card.pb-1
                   v-text-field(:value="quantity" autofocus filled dense type="number" hide-details @input="updateQuantity(item, $event)" style="width: 100px;")
-              a.text-h6.font-weight-light.text-decoration-none(:href="`https://nwdb.info/db/item/${item}`" :class="$vuetify.theme.dark ? 'white--text' : 'black--text'" target="_blank") {{ availableItems[item].name }}
+              a.text-h6.font-weight-bold.text-decoration-none(:href="`https://nwdb.info/db/item/${item}`" :class="[availableItems[item].rarity ? `rarity-${availableItems[item].rarity}`: $vuetify.theme.dark ? 'white--text' : 'black--text']" target="_blank") {{ availableItems[item].name }}
             v-list-item-subtitle.wrap-text(v-if="availableItems[item].raw")
               template(v-for="[rawItem, rawQuantity], index in availableItems[item].raw")
                 template(v-if="index !== 0") ,&nbsp;
                 template(v-if="availableItems[item].raw.length > 1 && index === (availableItems[item].raw.length - 1)") &amp;&nbsp;
                 | {{ rawQuantity * quantity }}&nbsp;
-                a.text-decoration-none(v-if="!availableItems[rawItem].options" :href="`https://nwdb.info/db/item/${rawItem}`" :class="$vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank") {{ availableItems[rawItem].name }}
+                a.font-weight-bold.text-decoration-none(v-if="!availableItems[rawItem].options" :href="`https://nwdb.info/db/item/${rawItem}`" :class="availableItems[rawItem].rarity ? `rarity-${availableItems[rawItem].rarity}`: $vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank") {{ availableItems[rawItem].name }}
                 template(v-else) {{ availableItems[rawItem].name }}
           v-list-item-action
             v-fade-transition
