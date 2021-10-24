@@ -37,3 +37,5 @@ jobs:
             VUE_APP_MATAMO_SITEID=${{ secrets.VUE_APP_MATAMO_SITEID }}
             VUE_APP_MATAMO_FILE=${{ secrets.VUE_APP_MATAMO_FILE }}
             VUE_APP_NWDB_RECIPEURL=${{ secrets.VUE_APP_NWDB_RECIPEURL }}
+            VUE_APP_RECAPTCHA_SITEKEY=${{ secrets.VUE_APP_RECAPTCHA_SITEKEY }}
+            VUE_APP_FEEDBACKURL=${{ secrets.VUE_APP_FEEDBACKURL }}

@@ -22,18 +22,30 @@
           v-list-item-avatar(color="grey darken-4")
             v-img(src="/thirdparty/nwdb-42x42.png")
           v-list-item-title New World Database
+    v-tooltip(v-if="feedbackUrl" left)
+      span Leave Feedback
+      template(v-slot:activator="{ on, attrs }")
+        v-btn(icon v-bind="attrs" v-on="on" @click="$refs.feedback.show()")
+          v-icon mdi-message
     v-tooltip(left)
       span(v-if="$vuetify.theme.dark") Set Light Mode
       span(v-else) Set Dark Mode
       template(v-slot:activator="{ on, attrs }")
         v-btn(icon v-bind="attrs" v-on="on" @click="toggleDarkMode")
           v-icon mdi-theme-light-dark
+    Feedback(ref="feedback" :feedback-url="feedbackUrl")
 </template>
 
 <script>
+import Feedback from './Feedback.vue';
+
 export default {
   name: 'AppBar',
+  components: {
+    Feedback
+  },
   data: () => ({
+    feedbackUrl: process.env.VUE_APP_FEEDBACKURL
   }),
   methods: {
     toggleDarkMode() {
