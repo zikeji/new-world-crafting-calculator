@@ -36,8 +36,21 @@
                         v-list-item-title(:class="availableItems[optionName].rarity ? `rarity-${availableItems[optionName].rarity}`: null") {{ availableItems[optionName].name }}
           v-list-item-action
             v-fade-transition
-              v-btn.ma-0(v-show="hover" icon @click="remove(item)")
-                v-icon(color="error") mdi-delete
+              div(v-show="hover")
+                .d-flex.justify-end
+                  v-tooltip(top nudge-left="20px")
+                    template(v-slot:activator="{ on, attrs }")
+                      v-edit-dialog(large save-text="Remove" @save="updateQuantity(item, quantity - quantityToRemove[item])" @close="closeRemoveQuantity(item)")
+                        template(v-slot:input)
+                          v-text-field(v-model="quantityToRemove[item]" type="number" placeholder="Quantity To Remove" autofocus single-line hide-details)
+                        v-btn.ma-0.mr-1(icon v-on="on" v-bind="attrs")
+                          v-icon mdi-minus
+                    span Remove quantity
+                  v-tooltip(top)
+                    template(v-slot:activator="{ on, attrs }")
+                      v-btn.ma-0(icon v-on="on" v-bind="attrs" @click="remove(item)")
+                        v-icon(color="error") mdi-delete
+                    span Remove resource    
     v-card-actions
       v-spacer
       v-btn.mr-2(v-if="recipeUrl" @click="$refs.nwdbImport.show()") NWDB Import
@@ -75,7 +88,8 @@ export default {
     quantity: null,
     availableItems,
     items: [],
-    recipeUrl: process.env.VUE_APP_NWDB_RECIPEURL
+    recipeUrl: process.env.VUE_APP_NWDB_RECIPEURL,
+    quantityToRemove: {}
   }),
   computed: {
     url() {
@@ -191,6 +205,11 @@ export default {
         }
       }
       this.updateUrl();
+    },
+    closeRemoveQuantity(item) {
+      setTimeout(() => {
+        delete this.quantityToRemove[item]
+      }, 250)
     }
   }
 }
