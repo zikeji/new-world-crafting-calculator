@@ -8,49 +8,51 @@
           v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
             v-icon(right) mdi-plus
     v-divider(v-if="items.length > 0")
-    template(v-for="{item, quantity, options}, index in items")
-      v-hover(v-slot:default="{ hover }")
-        v-list-item(:key="item" style="min-height: 60px;")
-          v-list-item-content
-            v-list-item-title
-              v-menu(eager disable-keys :close-on-content-click="false")
-                template(v-slot:activator="{ on, attrs }")
-                  span.text-h5.font-weight-bold(v-bind="attrs" v-on="on") {{ quantity }}x&nbsp;
-                v-card.pb-1
-                  v-text-field(:value="quantity" autofocus filled dense type="number" hide-details @input="updateQuantity(item, $event)" style="width: 100px;")
-              a.text-h6.font-weight-bold.text-decoration-none(:href="`https://nwdb.info/db/item/${item}`" :class="[availableItems[item].rarity ? `rarity-${availableItems[item].rarity}`: $vuetify.theme.dark ? 'white--text' : 'black--text']" target="_blank") {{ availableItems[item].name }}
-            v-list-item-subtitle.wrap-text(v-if="availableItems[item].raw")
-              template(v-for="[rawItem, rawQuantity], index in availableItems[item].raw")
-                template(v-if="index !== 0") ,&nbsp;
-                template(v-if="availableItems[item].raw.length > 1 && index === (availableItems[item].raw.length - 1)") &amp;&nbsp;
-                | {{ rawQuantity * quantity }}&nbsp;
-                a.font-weight-bold.text-decoration-none(v-if="!availableItems[rawItem].options" :href="`https://nwdb.info/db/item/${rawItem}`" :class="availableItems[rawItem].rarity ? `rarity-${availableItems[rawItem].rarity}`: $vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank") {{ availableItems[rawItem].name }}
-                template(v-else)
-                  a.font-weight-bold.text-decoration-none(:href="`https://nwdb.info/db/item/${getOption(rawItem, options)}`" :class="getOption(rawItem, options, true).rarity ? `rarity-${getOption(rawItem, options, true).rarity}`: $vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank")
-                    | {{ getOption(rawItem, options, true).name }}
-                  v-menu(offset-y open-on-hover :open-on-click="false")
-                    template(v-slot:activator="{ on, attrs }")
-                      v-icon.ml-1(small v-on="on" v-bind="attrs") mdi-square-edit-outline
-                    v-list(dense)
-                      v-list-item(v-for="optionName in availableItems[rawItem].options" :key="optionName" @click="updateOption(item, rawItem, optionName)")
-                        v-list-item-title(:class="availableItems[optionName].rarity ? `rarity-${availableItems[optionName].rarity}`: null") {{ availableItems[optionName].name }}
-          v-list-item-action
-            v-fade-transition
-              div(v-show="hover")
-                .d-flex.justify-end
-                  v-tooltip(top nudge-left="20px")
-                    template(v-slot:activator="{ on, attrs }")
-                      v-edit-dialog(large save-text="Remove" @save="updateQuantity(item, quantity - quantityToRemove[item])" @close="closeRemoveQuantity(item)")
-                        template(v-slot:input)
-                          v-text-field(v-model="quantityToRemove[item]" type="number" placeholder="Quantity To Remove" autofocus single-line hide-details)
-                        v-btn.ma-0.mr-1(icon v-on="on" v-bind="attrs")
-                          v-icon mdi-minus
-                    span Remove quantity
-                  v-tooltip(top)
-                    template(v-slot:activator="{ on, attrs }")
-                      v-btn.ma-0(icon v-on="on" v-bind="attrs" @click="remove(item)")
-                        v-icon(color="error") mdi-delete
-                    span Remove resource    
+    draggable(v-model="items" handle=".handle" :class="dragging ? 'drag-active' : ''" @start="dragging = true" @end="dragging = false")
+      transition-group
+        template(v-for="{item, quantity, options}, index in items")
+          v-list-item.resource(:key="item")
+            v-list-item-content
+              v-list-item-title
+                v-menu(eager disable-keys :close-on-content-click="false")
+                  template(v-slot:activator="{ on, attrs }")
+                    span.text-h5.font-weight-bold(v-bind="attrs" v-on="on") {{ quantity }}x&nbsp;
+                  v-card.pb-1
+                    v-text-field(:value="quantity" autofocus filled dense type="number" hide-details @input="updateQuantity(item, $event)" style="width: 100px;")
+                a.text-h6.font-weight-bold.text-decoration-none(:href="`https://nwdb.info/db/item/${item}`" :class="[availableItems[item].rarity ? `rarity-${availableItems[item].rarity}`: $vuetify.theme.dark ? 'white--text' : 'black--text']" target="_blank") {{ availableItems[item].name }}
+              v-list-item-subtitle.wrap-text(v-if="availableItems[item].raw")
+                template(v-for="[rawItem, rawQuantity], index in availableItems[item].raw")
+                  template(v-if="index !== 0") ,&nbsp;
+                  template(v-if="availableItems[item].raw.length > 1 && index === (availableItems[item].raw.length - 1)") &amp;&nbsp;
+                  | {{ rawQuantity * quantity }}&nbsp;
+                  a.font-weight-bold.text-decoration-none(v-if="!availableItems[rawItem].options" :href="`https://nwdb.info/db/item/${rawItem}`" :class="availableItems[rawItem].rarity ? `rarity-${availableItems[rawItem].rarity}`: $vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank") {{ availableItems[rawItem].name }}
+                  template(v-else)
+                    a.font-weight-bold.text-decoration-none(:href="`https://nwdb.info/db/item/${getOption(rawItem, options)}`" :class="getOption(rawItem, options, true).rarity ? `rarity-${getOption(rawItem, options, true).rarity}`: $vuetify.theme.dark ? 'grey--text text--lighten-2' : 'grey--text text--darken-2'" target="_blank")
+                      | {{ getOption(rawItem, options, true).name }}
+                    v-menu(offset-y open-on-hover :open-on-click="false")
+                      template(v-slot:activator="{ on, attrs }")
+                        v-icon.ml-1(small v-on="on" v-bind="attrs") mdi-square-edit-outline
+                      v-list(dense)
+                        v-list-item(v-for="optionName in availableItems[rawItem].options" :key="optionName" @click="updateOption(item, rawItem, optionName)")
+                          v-list-item-title(:class="availableItems[optionName].rarity ? `rarity-${availableItems[optionName].rarity}`: null") {{ availableItems[optionName].name }}
+            v-list-item-action
+              v-fade-transition
+                div.actions
+                  .d-flex.justify-end
+                    v-tooltip(top nudge-left="20px")
+                      template(v-slot:activator="{ on, attrs }")
+                        v-edit-dialog(large save-text="Remove" @save="updateQuantity(item, quantity - quantityToRemove[item])" @close="closeRemoveQuantity(item)")
+                          template(v-slot:input)
+                            v-text-field(v-model="quantityToRemove[item]" type="number" placeholder="Quantity To Remove" autofocus single-line hide-details)
+                          v-btn.ma-0.mr-1(icon v-on="on" v-bind="attrs")
+                            v-icon mdi-minus
+                      span Remove quantity
+                    v-tooltip(top)
+                      template(v-slot:activator="{ on, attrs }")
+                        v-btn.ma-0.mr-2(icon v-on="on" v-bind="attrs" @click="remove(item)")
+                          v-icon(color="error") mdi-delete
+                      span Remove resource
+                    v-icon.handle.ma-0 mdi-drag-horizontal
     v-card-actions
       v-spacer
       v-btn.mr-2(v-if="recipeUrl" @click="$refs.nwdbImport.show()") NWDB Import
@@ -65,8 +67,28 @@
     NWDBImport(ref="nwdbImport" :recipe-url="recipeUrl" @imported="importRecipe")
 </template>
 
+<style scoped>
+.handle {
+  cursor: pointer;
+}
+.resource {
+  min-height: 60px;
+}
+.resource .actions {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+.resource:hover .actions {
+  opacity: 1;
+}
+.drag-active .resource .actions {
+  opacity: 0;
+}
+</style>
+
 <script>
 import { pack, unpack } from 'jsonc-compress';
+import draggable from 'vuedraggable';
 import CopyToClipboard from './CopyToClipboard.vue';
 import BillOfMaterials from './Calculator/BillOfMaterials.vue';
 import NWDBImport from './Calculator/NWDBImport.vue';
@@ -75,6 +97,7 @@ import availableItems from '../assets/data.json';
 export default {
   name: 'Calculator',
   components: {
+    draggable,
     CopyToClipboard,
     BillOfMaterials,
     NWDBImport
@@ -89,7 +112,8 @@ export default {
     availableItems,
     items: [],
     recipeUrl: process.env.VUE_APP_NWDB_RECIPEURL,
-    quantityToRemove: {}
+    quantityToRemove: {},
+    dragging: false
   }),
   computed: {
     url() {
@@ -117,6 +141,11 @@ export default {
       if (val && val.endsWith('x') && /^[\d\s]+x$/.test(val)) {
         this.quantity = this.search.slice(0, this.search.length - 1).trim();
         this.search = '';
+      }
+    },
+    dragging(val) {
+      if (val === false) {
+        this.updateUrl()
       }
     }
   },
