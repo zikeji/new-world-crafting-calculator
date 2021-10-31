@@ -3,7 +3,10 @@
     v-card-text
       .d-flex.flex-row.align-stretch
         v-autocomplete.mr-2(v-model="selected" ref="resource" :search-input.sync="search" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.resource.blur(); $refs.qty.focus()" return-object)
-        v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details @keydown.enter="add")
+          template(v-slot:item="{ item }")
+            v-list-item-content
+              v-list-item-title(:class="item.rarity ? `rarity-${item.rarity}` : null") {{ item.name }}
+        v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details @keydown.enter="add" style="width: 50px;")
         div
           v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
             v-icon(right) mdi-plus
@@ -55,7 +58,7 @@
                     v-icon.handle.ma-0 mdi-drag-horizontal
     v-card-actions
       v-spacer
-      v-btn.mr-2(v-if="recipeUrl" @click="$refs.nwdbImport.show()") NWDB Import
+      v-btn.mr-2(@click="$refs.recipeImport.show()") Import Recipe
         v-icon(right) mdi-import
       CopyToClipboard(v-model="url")
         template(v-slot="{ click }")
@@ -64,7 +67,7 @@
       v-btn(color="primary" @click="$refs.billOfMaterials.show()" :disabled="items.length === 0") View BOM
         v-icon(right) mdi-list-status
     BillOfMaterials(ref="billOfMaterials" :url="url" :items="items")
-    NWDBImport(ref="nwdbImport" :recipe-url="recipeUrl" @imported="importRecipe")
+    RecipeImport(ref="recipeImport" @imported="importRecipe")
 </template>
 
 <style scoped>
@@ -91,7 +94,7 @@ import { pack, unpack } from 'jsonc-compress';
 import draggable from 'vuedraggable';
 import CopyToClipboard from './CopyToClipboard.vue';
 import BillOfMaterials from './Calculator/BillOfMaterials.vue';
-import NWDBImport from './Calculator/NWDBImport.vue';
+import RecipeImport from './Calculator/RecipeImport.vue';
 import availableItems from '../assets/data.json';
 
 export default {
@@ -100,7 +103,7 @@ export default {
     draggable,
     CopyToClipboard,
     BillOfMaterials,
-    NWDBImport
+    RecipeImport
   },
   mounted() {
     this.loadFromUrl()
@@ -111,7 +114,6 @@ export default {
     quantity: null,
     availableItems,
     items: [],
-    recipeUrl: process.env.VUE_APP_NWDB_RECIPEURL,
     quantityToRemove: {},
     dragging: false
   }),
