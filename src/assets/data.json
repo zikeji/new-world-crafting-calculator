@@ -347,8 +347,8 @@
     ],
     "rarity": 2
   },
-  "keypart_elementalheart": {
-    "name": "Elemental Heart",
+  "keypart_eternalheart": {
+    "name": "Eternal Heart",
     "raw": [
       [
         "alchemydeatht1",
@@ -365,8 +365,8 @@
     ],
     "rarity": 2
   },
-  "keypart_eternalheart": {
-    "name": "Eternal Heart",
+  "keypart_elementalheart": {
+    "name": "Elemental Heart",
     "raw": [
       [
         "alchemywatert1",
