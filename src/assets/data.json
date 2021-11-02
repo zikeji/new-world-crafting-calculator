@@ -5257,8 +5257,8 @@
     "name": "Ironwood Planks",
     "raw": [
       [
-        "timbert5",
-        5
+        "woodt5",
+        8
       ],
       [
         "timbert4",
@@ -5275,8 +5275,8 @@
     "name": "Glittering Ebony",
     "raw": [
       [
-        "woodt5",
-        8
+        "timbert5",
+        5
       ],
       [
         "wildwoodt1",
