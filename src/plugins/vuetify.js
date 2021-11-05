@@ -9,10 +9,12 @@ export default new Vuetify({
     dark: true,
     themes: {
       dark: {
-        primary: colors.purple.accent4
+        primary: colors.purple.accent4,
+        secondary: colors.purple.accent3
       },
       light: {
-        primary: colors.purple.accent3
+        primary: colors.purple.accent3,
+        secondary: colors.purple.accent2
       }
     }
   }

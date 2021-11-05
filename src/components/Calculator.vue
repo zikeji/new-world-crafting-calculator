@@ -1,6 +1,6 @@
 <template lang="pug">
   v-card.mx-auto.mt-5
-    v-card-text
+    v-card-text.d-none.d-sm-block
       .d-flex.flex-row.align-stretch
         v-autocomplete.mr-2(v-model="selected" ref="resource" :search-input.sync="search" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.resource.blur(); $refs.qty.focus()" return-object)
           template(v-slot:item="{ item }")
@@ -10,7 +10,7 @@
         div
           v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
             v-icon(right) mdi-plus
-    v-divider(v-if="items.length > 0")
+    v-divider.d-none.d-sm-flex(v-if="items.length > 0")
     draggable(v-model="items" handle=".handle" :class="dragging ? 'drag-active' : ''" @start="dragging = true" @end="dragging = false")
       transition-group
         template(v-for="{item, quantity, options}, index in items")
@@ -56,7 +56,7 @@
                           v-icon(color="error") mdi-delete
                       span Remove resource
                     v-icon.handle.ma-0 mdi-drag-horizontal
-    v-card-actions
+    v-card-actions.d-none.d-sm-flex
       v-spacer
       v-btn.mr-2(@click="$refs.recipeImport.show()") Import Recipe
         v-icon(right) mdi-import
@@ -66,8 +66,38 @@
             v-icon(right) mdi-content-copy
       v-btn(color="primary" @click="$refs.billOfMaterials.show()" :disabled="items.length === 0") View BOM
         v-icon(right) mdi-list-status
-    BillOfMaterials(ref="billOfMaterials" :url="url" :items="items")
+    portal(to="extendedAppBar")
+      v-speed-dial.d-flex.d-sm-none(v-model="fab" direction="bottom" absolute right style="bottom: -16px;")
+        template(v-slot:activator)
+          v-btn(v-model="fab" color="secondary" fab)
+            v-icon(v-if="fab") mdi-close
+            v-icon(v-else) mdi-dots-vertical
+        v-btn(fab small color="secondary" @click="resourceDialog = true")
+          v-icon mdi-plus
+        v-btn(fab small color="secondary" @click="$refs.recipeImport.show()")
+          v-icon mdi-import
+        v-btn(fab small color="secondary" :disabled="items.length === 0" @click="")
+          v-icon mdi-content-copy
+        v-btn(fab small color="secondary" :disabled="items.length === 0" @click="$refs.billOfMaterials.show()")
+          v-icon mdi-list-status
+    v-dialog(v-model="resourceDialog" max-width="600px")
+      v-card
+        v-card-title Add Resource
+        v-divider
+        v-card-text
+          .d-flex.flex-column.mt-5
+            v-autocomplete(v-model="selected" ref="mobileResource" :search-input.sync="mobileSearch" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.mobileResource.blur(); $refs.mobileQty.focus()" return-object)
+              template(v-slot:item="{ item }")
+                v-list-item-content
+                  v-list-item-title(:class="item.rarity ? `rarity-${item.rarity}` : null") {{ item.name }}
+            v-text-field.mt-3(v-model="quantity" ref="mobileQty" filled type="number" label="Quantity" hide-details @keydown.enter="add")
+        v-card-actions
+          v-spacer
+          v-btn(@click="resourceDialog = false") Close
+          v-btn(color="primary" @click="add" :disabled="!selected || !quantity") Add
+            v-icon(right) mdi-plus
     RecipeImport(ref="recipeImport" @imported="importRecipe")
+    BillOfMaterials(ref="billOfMaterials" :url="url" :items="items")
 </template>
 
 <style scoped>
@@ -77,15 +107,17 @@
 .resource {
   min-height: 60px;
 }
-.resource .actions {
-  opacity: 0;
-  transition: opacity 200ms ease-in-out;
-}
-.resource:hover .actions {
-  opacity: 1;
-}
-.drag-active .resource .actions {
-  opacity: 0;
+@media (min-width: 600px) {
+  .resource .actions {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+  .resource:hover .actions {
+    opacity: 1;
+  }
+  .drag-active .resource .actions {
+    opacity: 0;
+  }
 }
 </style>
 
@@ -110,12 +142,15 @@ export default {
   },
   data: () => ({
     search: '',
+    mobileSearch: '',
     selected: null,
     quantity: null,
     availableItems,
     items: [],
     quantityToRemove: {},
-    dragging: false
+    dragging: false,
+    resourceDialog: false,
+    fab: false
   }),
   computed: {
     url() {
@@ -143,6 +178,12 @@ export default {
       if (val && val.endsWith('x') && /^[\d\s]+x$/.test(val)) {
         this.quantity = this.search.slice(0, this.search.length - 1).trim();
         this.search = '';
+      }
+    },
+    mobileSearch(val) {
+      if (val && val.endsWith('x') && /^[\d\s]+x$/.test(val)) {
+        this.quantity = this.mobileSearch.slice(0, this.mobileSearch.length - 1).trim();
+        this.mobileSearch = '';
       }
     },
     dragging(val) {
@@ -191,6 +232,7 @@ export default {
       this.quantity = null;
       this.$refs.qty.blur();
       this.$refs.resource.focus();
+      this.resourceDialog = false;
       this.updateUrl();
     },
     updateQuantity(item, quantity) {

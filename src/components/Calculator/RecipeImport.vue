@@ -5,13 +5,13 @@
         v-card-title Import Recipe
         v-divider
         v-card-text
-          .d-flex.flex-row.align-stretch.mt-5
-            v-autocomplete.mr-2(v-model="recipe" ref="recipe" :search-input.sync="search" filled :items="recipes" label="Recipe Name" item-text="name" item-value="id" hide-details return-object @input="$refs.recipe.blur(); $refs.qty.focus()")
+          .d-flex.flex-column.flex-sm-row.align-stretch.mt-5
+            v-autocomplete.mr-0.mr-sm-2.mb-4.mb-sm-0(v-model="recipe" ref="recipe" :search-input.sync="search" filled :items="recipes" label="Recipe Name" item-text="name" item-value="id" hide-details return-object @input="$refs.recipe.blur(); $refs.qty.focus()")
               template(v-slot:item="{ item }")
                 v-list-item-content
                   v-list-item-title(:class="getClass(item)") {{ item.name }}
                   v-list-item-subtitle {{ item.type }}
-            v-text-field(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details @keydown.enter="importRecipe" style="width: 50px;")
+            v-text-field(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details @keydown.enter="importRecipe" :style="$vuetify.breakpoint.xs ? '' : 'width: 50px;'")
         v-card-actions
           v-spacer
           v-btn(@click="dialog = false") Close
