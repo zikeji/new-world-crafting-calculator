@@ -9,7 +9,7 @@
             v-autocomplete.mr-0.mr-sm-2.mb-4.mb-sm-0(v-model="recipe" ref="recipe" :search-input.sync="search" filled :items="recipes" label="Recipe Name" item-text="name" item-value="id" hide-details return-object @input="$refs.recipe.blur(); $refs.qty.focus()")
               template(v-slot:item="{ item }")
                 v-list-item-content
-                  v-list-item-title(:class="getClass(item)") {{ item.name }}
+                  v-list-item-title(:class="getClass(item)" v-html="mask(item.name)")
                   v-list-item-subtitle {{ item.type }}
             v-text-field(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details @keydown.enter="importRecipe" :style="$vuetify.breakpoint.xs ? '' : 'width: 50px;'")
         v-card-actions
@@ -76,6 +76,13 @@ export default {
         return item.tier ? `rarity-${item.tier}`: null;
       }
       return item.rarity ? `rarity-${item.rarity}`: null;
+    },
+    mask(name) {
+      if (!this.search) return name;
+      const search = this.search.toLocaleLowerCase();
+      const index = name.toLocaleLowerCase().indexOf(search);
+      if (index < 0) return name;
+      return `${name.slice(0, index)}<span class="v-list-item__mask">${name.slice(index, index+search.length)}</span>${name.slice(index + search.length)}`;
     },
     importRecipe() {
       console.log(this.recipe)

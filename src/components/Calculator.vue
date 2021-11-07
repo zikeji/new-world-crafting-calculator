@@ -5,7 +5,7 @@
         v-autocomplete.mr-2(v-model="selected" ref="resource" :search-input.sync="search" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.resource.blur(); $refs.qty.focus()" return-object)
           template(v-slot:item="{ item }")
             v-list-item-content
-              v-list-item-title(:class="item.rarity ? `rarity-${item.rarity}` : null") {{ item.name }}
+              v-list-item-title(:class="item.rarity ? `rarity-${item.rarity}` : null" v-html="mask(item.name, search)")
         v-text-field.mr-2(v-model="quantity" ref="qty" filled type="number" label="Quantity" hide-details @keydown.enter="add" style="width: 50px;")
         div
           v-btn.align-self-stretch(color="primary" height="100%" :disabled="!selected || !quantity" @click="add") Add
@@ -89,7 +89,7 @@
             v-autocomplete(v-model="selected" ref="mobileResource" :search-input.sync="mobileSearch" filled :items="Object.entries(availableItems).map(i => ({ ...i[1], id: i[0] })).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1)" label="Resource" item-text="name" item-value="id" hide-details @input="$refs.mobileResource.blur(); $refs.mobileQty.focus()" return-object)
               template(v-slot:item="{ item }")
                 v-list-item-content
-                  v-list-item-title(:class="item.rarity ? `rarity-${item.rarity}` : null") {{ item.name }}
+                  v-list-item-title(:class="item.rarity ? `rarity-${item.rarity}` : null" v-html="mask(item.name, mobileSearch)")
             v-text-field.mt-3(v-model="quantity" ref="mobileQty" filled type="number" label="Quantity" hide-details @keydown.enter="add")
         v-card-actions
           v-spacer
@@ -193,6 +193,13 @@ export default {
     }
   },
   methods: {
+    mask(name, search) {      
+      if (!search) return name;
+      search = search.toLocaleLowerCase();
+      const index = name.toLocaleLowerCase().indexOf(search);
+      if (index < 0) return name;
+      return `${name.slice(0, index)}<span class="v-list-item__mask">${name.slice(index, index+search.length)}</span>${name.slice(index + search.length)}`;
+    },
     loadFromUrl() {
       const params = new URLSearchParams(window.location.search);
       if (params.get('s')) {
